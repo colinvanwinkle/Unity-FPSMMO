@@ -1,0 +1,8 @@
+git clone <url> to clone git repository to current folder
+
+git add <filename> or -A (all files)
+git commit -m "<message>" to commit change to local repository
+git push - to commit changes to remote repository.
+
+git status - views status of files in directory
+
