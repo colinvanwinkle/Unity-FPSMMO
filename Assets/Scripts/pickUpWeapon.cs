@@ -33,6 +33,7 @@ public class pickUpWeapon : MonoBehaviour {
 
 		//get distance and if it is less than threshold, we can pick it up
 		//assign weapon to object with closest distance
+		//also, put a sphere at position to visualize where its travelling
 
 
 		if (distance < 3) {
