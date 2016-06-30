@@ -12,38 +12,48 @@ public class pickUpMace : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		GameObject weapon;
+		if (GameObject.Find ("mace_model") == null)
+			return;
+		
+		float distance = Vector3.Distance(this.transform.position, GameObject.Find("mace_model").transform.position);
+		
+		
 
-		if (Input.GetKeyDown ("f") && !isKeyDown) {
-			isKeyDown = true;
-			timeStarted = Time.time;
+		if (distance < 3) {
 
-		}
-
-		if (Input.GetKeyUp ("f") && isKeyDown || (Time.time - timeStarted > 0.5 && timeStarted != 0f && isKeyDown)) {
-			isKeyDown = false;
-			timeStarted = 0;
-
-			if (Time.time - timeStarted > 0.5) {
-				
-				Instantiate (mace, Vector3.zero, Quaternion.identity);
-				weapon = GameObject.Find ("mace(Clone)");
-
-				weapon.transform.SetParent (this.transform);
-				weapon.transform.localPosition = new Vector3 (0.8f, -0.46f, 1.19f);
-				weapon.transform.localScale.Scale (new Vector3 (.1f, .1f, .1f));
-				Destroy (GameObject.Find ("mace_model"));
-
+			if (Input.GetKeyDown ("f") && !isKeyDown) {
+				isKeyDown = true;
+				timeStarted = Time.time;
 
 			}
-		} else if (Input.GetKeyUp ("f")) {
-			isKeyDown = false;
-			timeStarted = 0;
+
+			if (Input.GetKeyUp ("f") && isKeyDown && Time.time - timeStarted > 0.5) {
+				isKeyDown = false;
+				timeStarted = 0;
+
+				if (Time.time - timeStarted > 0.5) {
+					Destroy (GameObject.Find ("mace_model"));
+
+
+					Instantiate (mace, Vector3.zero, Quaternion.identity);
+					mace = GameObject.Find ("mace(Clone)");
+					mace.transform.SetParent (GameObject.Find ("FirstPersonCharacter").transform);
+
+			
+					mace.transform.localEulerAngles = new Vector3 (310f, 176f, 180f);
+					mace.transform.localPosition = new Vector3 (0.74f, -0.91f, 1.39f);
+					mace.transform.localScale = new Vector3 (10f, 10f, 10f);
+
+
+				}
+			} else if (Input.GetKeyUp ("f")) {
+				isKeyDown = false;
+				timeStarted = 0;
+			}
+
+
+
 		}
-
-
-
-
 
 	}
 
