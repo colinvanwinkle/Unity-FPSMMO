@@ -1,0 +1,1 @@
+GameObject.Find("object name in hierarchy") - returns the reference to the object with the name specified
