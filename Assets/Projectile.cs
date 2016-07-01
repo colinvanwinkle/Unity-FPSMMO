@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿//this class creates projectiles only
+//objects are created in the Fire class.
+using UnityEngine;
 using System.Collections;
-
 	public class Projectile : ScriptableObject {
-	
+
+
+
 	public int damage;
 	public float range;
 	public float bulletSpeed;

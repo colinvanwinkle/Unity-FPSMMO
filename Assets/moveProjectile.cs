@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿//this class is responsible for processing all projectiles.
+
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 

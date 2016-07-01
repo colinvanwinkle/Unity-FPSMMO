@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿/* This class is responsible for managing picking up weapons from the ground
+ */
+
+using UnityEngine;
 using System.Collections;
 
 public class pickUpWeapon : MonoBehaviour {

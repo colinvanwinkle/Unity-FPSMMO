@@ -1,7 +1,14 @@
-﻿using UnityEngine;
+﻿/*This class holds the instance variables for the 
+ * characteristics for each weapon. This class is called by
+ * the Fire class when mouse is clicked to shoot
+ * 
+ */
+
+using UnityEngine;
 using System.Collections;
 
 public class Weapon : MonoBehaviour {
+	
 	public GameObject currentWeapon;
 	public int weaponDamage;
 	public float fireSpeed;
@@ -19,10 +26,13 @@ public class Weapon : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		//gets the active weapon from the pickUpWeapon script
 		pickUpWeapon weaponScript = GetComponent<pickUpWeapon> ();
 		currentWeapon = weaponScript.activeWeapon;
 
 
+		//assigns the instance variables depending on the weapon
 		if (currentWeapon != null)
 		switch (currentWeapon.name) {
 
