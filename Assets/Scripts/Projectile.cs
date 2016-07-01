@@ -23,7 +23,7 @@ using System.Collections;
 
 			bullet = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 			bullet.transform.position = origin;
-			bullet.transform.localScale.Set (.01f, .01f, .01f);
+			bullet.transform.localScale = new Vector3 (.1f, .1f, .1f);
 	}
 
 
