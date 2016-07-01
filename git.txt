@@ -6,3 +6,14 @@ git push - to commit changes to remote repository.
 
 git status - views status of files in directory
 
+
+
+
+
+to allow git to overwrite your files:
+
+ git add *
+ git commit -a -m "local file server commit message"
+
+ git fetch origin master
+ git merge -s recursive -X theirs origin/master
