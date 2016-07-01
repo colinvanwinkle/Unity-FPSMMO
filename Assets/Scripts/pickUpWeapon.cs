@@ -3,40 +3,63 @@ using System.Collections;
 
 public class pickUpWeapon : MonoBehaviour {
 
-	public GameObject[] weapons; 
+	public GameObject activeWeapon;
+
+
+
+
 	bool isKeyDown = false;
 	float timeStarted = 0f;
 
 
 
-
-
+	GameObject screen;
+	GameObject currentPotentialWeap = null;
 
 	// Use this for initialization
 	void Start(){
+
+		screen = GameObject.Find("FirstPersonCharacter");
+	
+
+
+	
 	}
 
 	// Update is called once per frame
 	void Update () {
 
+	
+
+
+
+		RaycastHit[] weaponsFound = Physics.SphereCastAll(new Ray(screen.transform.position, screen.transform.forward), 1);
+
+		for (int i = 0; i < weaponsFound.Length; i++) {
+			float distCharToWeapon = Vector3.Distance (weaponsFound [i].collider.gameObject.transform.position, this.transform.position);
+
+			float distCharToCurrentPotentialWeapon = 0;
+
+				if (currentPotentialWeap != null)
+				distCharToCurrentPotentialWeapon = Vector3.Distance (currentPotentialWeap.transform.position, this.transform.position);
+
+				if  ( weaponsFound[i].collider.tag.Equals ("Weapon") && distCharToWeapon < 3 ) {
+
+				if ((currentPotentialWeap == null || distCharToWeapon < distCharToCurrentPotentialWeapon) && activeWeapon != weaponsFound[i].collider.gameObject) {
+					currentPotentialWeap = weaponsFound [i].collider.gameObject;
+					
+					print (currentPotentialWeap);
+
+				}
+
+
+			}
+		}
+
+	
 
 
 	
-		float distance = Vector3.Distance(this.transform.position, GameObject.Find("mace_model").transform.position);
-
-		RaycastHit[] weapons = Physics.SphereCastAll(new Ray(this.transform.position, Vector3.forward), 5);
-
-		for (int i = 0; i < weapons.Length; i++) {
-			print (weapons [i].collider.tag);
-
-		}
-
-		//get distance and if it is less than threshold, we can pick it up
-		//assign weapon to object with closest distance
-		//also, put a sphere at position to visualize where its travelling
-
-
-		if (distance < 3) {
 
 			if (Input.GetKeyDown ("f") && !isKeyDown) {
 				isKeyDown = true;
@@ -49,17 +72,15 @@ public class pickUpWeapon : MonoBehaviour {
 				timeStarted = 0;
 
 				if (Time.time - timeStarted > 0.5) {
-				//	Destroy (GameObject.Find ("mace_model"));
 
+				activeWeapon = currentPotentialWeap;
 
-				//	Instantiate (mace, Vector3.zero, Quaternion.identity);
-				//	weapons[0] = GameObject.Find ("mace(Clone)");
-				//	weapons[0].transform.SetParent (GameObject.Find ("FirstPersonCharacter").transform);
+				activeWeapon.transform.SetParent (screen.transform);
+				activeWeapon.transform.localEulerAngles = new Vector3 (310f, 176f, 180f);
+				activeWeapon.transform.localPosition = new Vector3 (0.74f, -0.91f, 1.39f);
 
-			
-					//weapons[0].transform.localEulerAngles = new Vector3 (310f, 176f, 180f);
-				//	weapons[0].transform.localPosition = new Vector3 (0.74f, -0.91f, 1.39f);
-				//	weapons[0].transform.localScale = new Vector3 (10f, 10f, 10f);
+				currentPotentialWeap = null;
+
 
 
 				}
@@ -70,7 +91,7 @@ public class pickUpWeapon : MonoBehaviour {
 
 
 
-		}
+		
 
 	}
 
