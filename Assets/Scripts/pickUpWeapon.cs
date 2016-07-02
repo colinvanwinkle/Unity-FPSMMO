@@ -84,12 +84,23 @@ public class pickUpWeapon : MonoBehaviour {
 			isKeyDown = false;
 			timeStarted = 0;
 
+			if (activeWeapon != null) {
+				activeWeapon.AddComponent<Rigidbody> ();
+				activeWeapon.transform.parent = GameObject.Find ("weapons_on_ground").transform;
+			}
+
 
 
 			activeWeapon = currentPotentialWeap;
 
+			print (currentPotentialWeap);
+
+			//destroys rigidbody so weapon doesn't fall down when we pick it up
+			Destroy(activeWeapon.GetComponent<Rigidbody>());
+
 			//makes the active weapon a child of the character
 			activeWeapon.transform.SetParent (screen.transform);
+
 
 			//resets 
 			currentPotentialWeap = null;
@@ -108,9 +119,12 @@ public class pickUpWeapon : MonoBehaviour {
 
 			case "handgun":
 				weaponRotation = new Vector3 (353.8f, 95.5801f, 5.80f);
-				weaponPosition = new Vector3 (0.71f, -0.64f, 1.55f);
+				weaponPosition = new Vector3 (0.95f, -0.89f, 1.68f);
 				break;
-
+			case "Rifle":
+				weaponRotation = new Vector3 (-5.33f, 85.32f, 0.9f);
+				weaponPosition = new Vector3 (.2f, -0.47f, 1.5f);
+				break;
 			}
 
 			//changes the weapon's properties

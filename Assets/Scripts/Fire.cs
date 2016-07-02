@@ -29,8 +29,11 @@ public class Fire : MonoBehaviour {
 
 
 			//gets the characteristics of the current weapon if a new weapon is being used
-			if (weaponAtLastFire != weapon) 
+			if (weapon.currentWeapon != GetComponent<pickUpWeapon> ().activeWeapon) {
+				weapon.currentWeapon = GetComponent<pickUpWeapon> ().activeWeapon;
 				weapon.initWeaponInfo ();
+
+			}
 
 
 				//we want to exit this update() if user has no weapon
@@ -55,9 +58,15 @@ public class Fire : MonoBehaviour {
 				//initializes the projectile with the gun's specifications
 				Projectile projectile = ScriptableObject.CreateInstance ("Projectile") as Projectile;
 				projectile.init (weapon.weaponDamage, weapon.range, weapon.bulletSpeed, 
-					new Vector3 (camera.transform.position.x, camera.transform.position.y, camera.transform.position.z) + camera.transform.forward, camera.transform.forward);
+				new Vector3 (camera.transform.position.x, camera.transform.position.y, camera.transform.position.z) + camera.transform.forward, camera.transform.forward, this.gameObject);
+
+
+				
 
 				projectileList.Add (projectile);
+				
+
+				
 				weapon.ammo = weapon.ammo - 1;
 				print (weapon.ammo);
 
