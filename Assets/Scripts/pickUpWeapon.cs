@@ -3,8 +3,9 @@
 
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class pickUpWeapon : MonoBehaviour {
+public class pickUpWeapon : NetworkBehaviour {
 
 	//weapon being held
 	public GameObject activeWeapon;

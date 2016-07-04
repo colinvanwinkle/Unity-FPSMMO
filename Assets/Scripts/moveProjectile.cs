@@ -3,8 +3,10 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 
-public class moveProjectile : MonoBehaviour {
+
+public class moveProjectile : NetworkBehaviour {
 
 	int hasbeenHitAlready;
 
@@ -16,6 +18,7 @@ public class moveProjectile : MonoBehaviour {
 		//may want to change this to more efficient operation later.
 		foreach (Projectile projectile in projectileList.ToArray()){
 		
+			//moves the projectile in it's direction
 			projectile.bullet.transform.position += projectile.direction / 100 * projectile.bulletSpeed;
 			if (Vector3.Distance (projectile.bullet.transform.position, this.transform.position) >= projectile.range) {
 				Destroy (projectile.bullet);
@@ -23,6 +26,8 @@ public class moveProjectile : MonoBehaviour {
 			}
 
 
+
+			//interpolates whether a bullet will hit or not
 			RaycastHit rayFromProjectileForward;  
 			RaycastHit rayFromProjectileBackward; 
 

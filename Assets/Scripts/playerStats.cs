@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
 
-public class playerStats : MonoBehaviour {
+public class playerStats : NetworkBehaviour {
 
 	public int health = 100;
 	int armor = 0;

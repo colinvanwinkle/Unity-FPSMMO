@@ -3,10 +3,11 @@
 
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class detectCollisions : MonoBehaviour {
+public class detectCollisions : NetworkBehaviour {
 
-	// Use this for initialization
+	// When a bullet collides with an enemy
 	public void OnTriggerEnter(Collider col){
 
 		if (col.gameObject.tag.Equals("Enemy")){

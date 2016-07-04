@@ -25,6 +25,7 @@ using System.Collections;
 			this.owner = owner;
 			
 
+		//creates the bullet projectile
 		bullet = GameObject.CreatePrimitive (PrimitiveType.Sphere);
 		bullet.transform.position = origin;
 		bullet.transform.localScale = new Vector3 (.1f, .1f, .1f);

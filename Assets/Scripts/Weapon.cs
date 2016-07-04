@@ -6,8 +6,11 @@
 
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class Weapon : MonoBehaviour{
+
+
+public class Weapon : NetworkBehaviour{
 	
 	public GameObject currentWeapon;
 	public int weaponDamage;
@@ -23,6 +26,8 @@ public class Weapon : MonoBehaviour{
 	bool reloading = false;
 	float timeStartReload;
 
+	public float spreadThresh;
+	public float spreadFactor;
 
 	// Update is called once per frame
 	public void initWeaponInfo () {
@@ -38,13 +43,15 @@ public class Weapon : MonoBehaviour{
 			switch (currentWeapon.name) {
 
 			case "handgun":
-				fireSpeed = 0.2f;
+				fireSpeed = 0.13f;
 				reloadTime = 1.5f;
 				isAuto = false;
 				maxAmmoCapacity = 12;
 				range = 40;
 				weaponDamage = 12;
 				bulletSpeed = 100;
+				spreadThresh = .3f;
+				spreadFactor = 1;
 				break;
 
 			case "Rifle":
@@ -55,6 +62,8 @@ public class Weapon : MonoBehaviour{
 				range = 80;
 				weaponDamage = 20;
 				bulletSpeed = 200;
+				spreadThresh = .1f;
+				spreadFactor = 1;
 				break;
 			}
 

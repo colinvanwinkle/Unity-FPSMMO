@@ -5,7 +5,9 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-public class Fire : MonoBehaviour {
+using UnityEngine.Networking;
+
+public class Fire : NetworkBehaviour {
 
 	//list we will add projectiles to
 	public List<Projectile> projectileList = new List<Projectile>();
@@ -14,6 +16,9 @@ public class Fire : MonoBehaviour {
 	float timeOfLastFire;
  	Weapon weapon;
 	Weapon weaponAtLastFire;
+
+	int spreadDegree;
+	float timeLastSpreadDec;
 	
 	//need to also implement fire speed, reload time, check if has ammo
 	void Update () {
@@ -58,23 +63,23 @@ public class Fire : MonoBehaviour {
 				//initializes the projectile with the gun's specifications
 				Projectile projectile = ScriptableObject.CreateInstance ("Projectile") as Projectile;
 				projectile.init (weapon.weaponDamage, weapon.range, weapon.bulletSpeed, 
-				new Vector3 (camera.transform.position.x, camera.transform.position.y, camera.transform.position.z) + camera.transform.forward, camera.transform.forward, this.gameObject);
+				new Vector3 (camera.transform.position.x, camera.transform.position.y, camera.transform.position.z) + camera.transform.forward, calculateDir(camera), this.gameObject);
 
 
-				
+
 
 				projectileList.Add (projectile);
 				
 
 				
 				weapon.ammo = weapon.ammo - 1;
-				print (weapon.ammo);
+				print ("Ammo: " + weapon.ammo);
 
 	} // end of user input
 
-
-
 		timeSinceLastFire = Time.time - timeOfLastFire;
+
+
 
 		//gets the weapon object(have to put this line here because if user hasn't
 		//picked up weapon, weapon variable will not be set and this will generate null
@@ -95,5 +100,28 @@ public class Fire : MonoBehaviour {
 
 
   } //end of update
+
+	void FixedUpdate(){
+		if (weapon != null && timeSinceLastFire > weapon.spreadThresh && spreadDegree > 0 && Time.time - timeLastSpreadDec > .1f){
+			spreadDegree--;
+		timeLastSpreadDec = Time.time;
+		}
+			
+	}
+
+	Vector3 calculateDir(GameObject camera){
+		int x;
+		if (Random.value < .5) x = -1 ;else	x = 1;
+		if (timeSinceLastFire < weapon.spreadThresh && spreadDegree < 15) spreadDegree++;
+
+		print (spreadDegree);
+
+		Vector3 vertOffSet = (x * weapon.spreadFactor * Random.value * Mathf.Sqrt(spreadDegree) / 100 * camera.transform.up);
+		Vector3 HorizOffSet =(x * weapon.spreadFactor * Random.value * Mathf.Sqrt(spreadDegree) / 100 * camera.transform.right);
+
+		Debug.DrawRay (camera.transform.position, camera.transform.forward + vertOffSet + HorizOffSet, Color.green, 6);
+		return camera.transform.forward + vertOffSet + HorizOffSet;
+
+	}
 
 }
