@@ -1,0 +1,2 @@
+Assets/Models/Handgun/Materials/Material.001.mat
+Assets/Models/Handgun/handgun.fbx
