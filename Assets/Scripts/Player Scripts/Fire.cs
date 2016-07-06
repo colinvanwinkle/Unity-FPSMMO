@@ -27,7 +27,7 @@ public class Fire : NetworkBehaviour {
 			return;
 
 		//checks if mouse button is clicked				//check if it is held and an automatic (weapon must not be null beacuse we are using weapon reference)
-		if ((Input.GetMouseButtonDown (0) || (weapon != null && Input.GetMouseButton(0) && weapon.isAutomatic())) && fireable ) {
+		if ((Input.GetMouseButtonDown (0) || (weapon != null && Input.GetMouseButton (0) && weapon.isAutomatic ())) && fireable) {
 			
 			//gets the weapon script
 			weapon = GetComponent<Weapon> ();
@@ -42,36 +42,41 @@ public class Fire : NetworkBehaviour {
 			}
 
 
-				//we want to exit this update() if user has no weapon
-				if (weapon.currentWeapon == null) {
-					print ("no weapon");
-					return;
-				}
+			//we want to exit this update() if user has no weapon
+			if (weapon.currentWeapon == null) {
+				print ("no weapon");
+				return;
+			}
 				
-				//sets this weapon to be last weapon fired
-				weaponAtLastFire = weapon;
-				fireable = false;
+			//sets this weapon to be last weapon fired
+			weaponAtLastFire = weapon;
+			fireable = false;
 
-				//gets the current game-time (used for fireSpeed)
-				timeOfLastFire = Time.time;
+			//gets the current game-time (used for fireSpeed)
+			timeOfLastFire = Time.time;
 
-				//gets the camera
-				GameObject camera = this.transform.GetChild (0).gameObject;
+			//gets the camera
+			GameObject camera = this.transform.GetChild (0).gameObject;
 
-				//add a projectile to every players screen in the game
-				CmdAddProjectile (weapon.weaponDamage, weapon.range, weapon.bulletSpeed, camera.transform.position + camera.transform.forward, calculateDir (camera), this.gameObject);
+			//add a projectile to every players screen in the game
+			CmdAddProjectile (weapon.weaponDamage, weapon.range, weapon.bulletSpeed, camera.transform.position + camera.transform.forward, calculateDir (camera), this.gameObject);
 
 			
 
 
 				
-				weapon.ammo = weapon.ammo - 1;
-				print ("Ammo: " + weapon.ammo);
+			weapon.ammo = weapon.ammo - 1;
+			print ("Ammo: " + weapon.ammo);
 
-	} // end of user input
+		} else if (Input.GetKeyDown ("r") && !weapon.isReloading() && weapon.ammo < weapon.maxAmmoCapacity) {
+			weapon.reload ();
+			fireable = false;
+		}// end of user input
 
 		timeSinceLastFire = Time.time - timeOfLastFire;
 
+		//expands crosshair
+		GameObject.Find ("Crosshair").transform.localScale =  .017f * new Vector3 (spreadDegree * weapon.spreadFactor, spreadDegree * weapon.spreadFactor, 0);
 
 
 		//gets the weapon object(have to put this line here because if user hasn't
@@ -82,7 +87,7 @@ public class Fire : NetworkBehaviour {
 
 
 		//(eventually we can remove &&weapon.currentweapon because all weapons will have a current weapon)
-		if (weapon != null && weapon.currentWeapon != null && timeSinceLastFire >= weapon.fireSpeed && weapon.hasAmmo ()) {
+		if (weapon != null && weapon.currentWeapon != null && timeSinceLastFire >= weapon.fireSpeed && weapon.hasAmmo () && !weapon.isReloading()) {
 			fireable = true;
 		}
 		//else, if we have a weapon, but it doesn't have ammo and isn't currently reloading, we should reload it.
@@ -95,7 +100,8 @@ public class Fire : NetworkBehaviour {
   } //end of update
 
 	void FixedUpdate(){
-		if (weapon != null && timeSinceLastFire > weapon.spreadThresh && spreadDegree > 0 && Time.time - timeLastSpreadDec > .1f){
+		//decreases the width of the spray if enough time has passed since last shot
+		if (weapon != null && timeSinceLastFire > weapon.spreadThresh && spreadDegree > 0 && Time.time - timeLastSpreadDec > 0.05f){
 			spreadDegree--;
 		timeLastSpreadDec = Time.time;
 		}
@@ -110,16 +116,25 @@ public class Fire : NetworkBehaviour {
 		if (timeSinceLastFire < weapon.spreadThresh && spreadDegree < 15) spreadDegree++;
 
 
-		//creates two random offset vectors in the up and right direction. (makes a square potentially, need to changet this to circle);
+		//creates two random offset vectors in the up and right direction. 
 		if (Random.value < 0.5f) x = -1 ;else x = 1;
-		Vector3 vertOffSet = (x * weapon.spreadFactor * Random.value * Mathf.Sqrt(spreadDegree) / 100 * camera.transform.up);
+		Vector3 vertOffSet = (x  * Random.value * Mathf.Sqrt(spreadDegree * weapon.spreadFactor) / 100 * camera.transform.up);
 		if (Random.value < 0.5f) x = -1 ;else x = 1;
-		Vector3 HorizOffSet = (x * weapon.spreadFactor * Random.value * Mathf.Sqrt(spreadDegree) / 100 * camera.transform.right);
+		Vector3 HorizOffSet = (x * Random.value * Mathf.Sqrt(spreadDegree * weapon.spreadFactor) / 100 * camera.transform.right);
 
-		//while (Vector3.Magnitude(vertOffSet) * Vector3.Magnitude(vertOffSet) + Vector3.Magnitude(vertOffSet) * Vector3.Magnitude(vertOffSet) > Mathf.Pow(Mathf.Sqrt(spreadDegree) / 100,2))
-			
 
-		Debug.DrawRay (camera.transform.position, camera.transform.forward + vertOffSet + HorizOffSet, Color.green, 6);
+		//this loop does the same thing as above block, but recalculates if the bullet falls outside the circle defined by 
+		//this equation in the while statement
+		while (Vector3.Magnitude (vertOffSet) * Vector3.Magnitude (vertOffSet) + Vector3.Magnitude (HorizOffSet) * 
+			Vector3.Magnitude (HorizOffSet) > Mathf.Pow (Mathf.Sqrt (spreadDegree * weapon.spreadFactor) / 100, 2)) {
+		
+			if (Random.value < 0.5f) x = -1 ;else x = 1;
+			vertOffSet = (x * Random.value * Mathf.Sqrt(spreadDegree * weapon.spreadFactor) / 100 * camera.transform.up);
+			if (Random.value < 0.5f) x = -1 ;else x = 1;
+			HorizOffSet = (x * Random.value * Mathf.Sqrt(spreadDegree * weapon.spreadFactor) / 100 * camera.transform.right);
+		}
+
+		//returns the offset vector for bullet spray
 		return camera.transform.forward + vertOffSet + HorizOffSet;
 
 	}

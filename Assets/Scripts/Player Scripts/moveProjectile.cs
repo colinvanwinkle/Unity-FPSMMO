@@ -20,6 +20,8 @@ public class moveProjectile : NetworkBehaviour {
 		
 			//moves the projectile in it's direction
 
+			//if the bullet collided with something and it was destroyed, 
+			//remove the projectile containing the bullet from the list and exit this function
 			if (projectile.bullet == null){
 				projectileList.Remove (projectile);
 				return;

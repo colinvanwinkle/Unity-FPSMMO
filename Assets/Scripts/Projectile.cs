@@ -32,6 +32,8 @@ using System.Collections;
 		bullet.AddComponent<detectCollisions> ();
 		bullet.GetComponent<detectCollisions> ().dmg = damage;
 		bullet.GetComponent<MeshRenderer> ().enabled = false;
+
+		//Bullet name is projectile_<player_that_shot_bullet>, we will use this for collisions.
 		bullet.name = "projectile_" + owner.name;
 
 	

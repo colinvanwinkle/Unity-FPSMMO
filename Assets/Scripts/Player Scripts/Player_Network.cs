@@ -28,13 +28,14 @@ public class Player_Network : NetworkBehaviour {
 		playerTransform.position = new Vector3 (250, 11, 170);
 		this.gameObject.tag = "Enemy";
 
+		//appends a random number to the end of the player name
 		int id = Random.Range (1, 100);
 		this.name = this.name + id;
 		playerStats.players.Add (this.gameObject.name, 100);
 
 
 
-
+		//disables character if we are not that controller
 		if (!isLocalPlayer) {
 			FPSCamera.GetComponent<Camera> ().enabled = false;
 			FPSCamera.GetComponent<AudioListener>().enabled = false;

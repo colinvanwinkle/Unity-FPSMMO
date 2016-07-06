@@ -9,7 +9,7 @@ public class detectCollisions : NetworkBehaviour {
 
 	public int dmg = 0;
 
-	// When a bullet collides with an enemy
+	// When a bullet collides with an enemy, call the function that damages a player.
 	public void OnTriggerEnter(Collider col){
 
 

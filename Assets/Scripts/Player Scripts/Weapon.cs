@@ -58,12 +58,12 @@ public class Weapon : NetworkBehaviour{
 				fireSpeed = .07f;
 				reloadTime = 2.0f;
 				isAuto = true;
-				maxAmmoCapacity = 25;
+				maxAmmoCapacity = 200;
 				range = 80;
-				weaponDamage = 20;
+				weaponDamage = 15;
 				bulletSpeed = 200;
 				spreadThresh = .1f;
-				spreadFactor = 1;
+				spreadFactor = 5;
 				break;
 			}
 
@@ -73,7 +73,7 @@ public class Weapon : NetworkBehaviour{
 		}
 	}
 
-
+	//checks if reloading is done
 	void Update(){
 		
 		if (reloading) {
