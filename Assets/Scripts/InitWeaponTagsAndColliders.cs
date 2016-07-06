@@ -10,7 +10,6 @@ public class InitWeaponTagsAndColliders : NetworkBehaviour  {
 			Transform weapon = this.transform.GetChild (i);
 			weapon.gameObject.tag= "Weapon";
 			weapon.gameObject.AddComponent<BoxCollider> ();
-			weapon.gameObject.AddComponent<Rigidbody> ();
 		}
 
 	}

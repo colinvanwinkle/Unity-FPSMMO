@@ -23,7 +23,8 @@ public class Fire : NetworkBehaviour {
 	//need to also implement fire speed, reload time, check if has ammo
 	void Update () {
 
-	
+		if (!isLocalPlayer)
+			return;
 
 		//checks if mouse button is clicked				//check if it is held and an automatic (weapon must not be null beacuse we are using weapon reference)
 		if ((Input.GetMouseButtonDown (0) || (weapon != null && Input.GetMouseButton(0) && weapon.isAutomatic())) && fireable ) {
@@ -57,19 +58,11 @@ public class Fire : NetworkBehaviour {
 				//gets the camera
 				GameObject camera = this.transform.GetChild (0).gameObject;
 
+				//add a projectile to every players screen in the game
+				CmdAddProjectile (weapon.weaponDamage, weapon.range, weapon.bulletSpeed, camera.transform.position + camera.transform.forward, calculateDir (camera), this.gameObject);
 
+			
 
-				//creates a proectile object and adds it to the projectile list that will be processed by moveProjectile.cs
-				//initializes the projectile with the gun's specifications
-				Projectile projectile = ScriptableObject.CreateInstance ("Projectile") as Projectile;
-				projectile.init (weapon.weaponDamage, weapon.range, weapon.bulletSpeed, 
-				new Vector3 (camera.transform.position.x, camera.transform.position.y, camera.transform.position.z) + camera.transform.forward, calculateDir(camera), this.gameObject);
-
-
-
-
-				projectileList.Add (projectile);
-				
 
 				
 				weapon.ammo = weapon.ammo - 1;
@@ -109,19 +102,44 @@ public class Fire : NetworkBehaviour {
 			
 	}
 
+	//This calculates the random direciton of the bullet based on how quickly the user is firing (bullet spread)
 	Vector3 calculateDir(GameObject camera){
 		int x;
-		if (Random.value < .5) x = -1 ;else	x = 1;
+
+		//increases the amount of spread if this gun was fired faster than its threshhold
 		if (timeSinceLastFire < weapon.spreadThresh && spreadDegree < 15) spreadDegree++;
 
-		print (spreadDegree);
 
+		//creates two random offset vectors in the up and right direction. (makes a square potentially, need to changet this to circle);
+		if (Random.value < 0.5f) x = -1 ;else x = 1;
 		Vector3 vertOffSet = (x * weapon.spreadFactor * Random.value * Mathf.Sqrt(spreadDegree) / 100 * camera.transform.up);
-		Vector3 HorizOffSet =(x * weapon.spreadFactor * Random.value * Mathf.Sqrt(spreadDegree) / 100 * camera.transform.right);
+		if (Random.value < 0.5f) x = -1 ;else x = 1;
+		Vector3 HorizOffSet = (x * weapon.spreadFactor * Random.value * Mathf.Sqrt(spreadDegree) / 100 * camera.transform.right);
+
+		//while (Vector3.Magnitude(vertOffSet) * Vector3.Magnitude(vertOffSet) + Vector3.Magnitude(vertOffSet) * Vector3.Magnitude(vertOffSet) > Mathf.Pow(Mathf.Sqrt(spreadDegree) / 100,2))
+			
 
 		Debug.DrawRay (camera.transform.position, camera.transform.forward + vertOffSet + HorizOffSet, Color.green, 6);
 		return camera.transform.forward + vertOffSet + HorizOffSet;
 
+	}
+
+	//calls on the server to update all the clients info on the projectiles
+	[Command]
+	void CmdAddProjectile(int dmg, float range, float speed, Vector3 origin, Vector3 dir, GameObject owner){
+		RpcAddProjectile( dmg,  range,  speed,  origin,  dir,  owner);
+	}
+
+	//creates a projectile and puts it in each users projectile list
+	[ClientRpc]
+	void RpcAddProjectile(int dmg, float range, float speed, Vector3 origin, Vector3 dir, GameObject owner){
+		Projectile projectile = ScriptableObject.CreateInstance ("Projectile") as Projectile;
+		projectile.init (dmg, range, speed, origin, dir, owner);
+
+		//this actually gets the Fire.cs script of each client individually, so this is not referring to our local player's script
+		//therefore, this adds a projectile to every players projectile list.
+		GetComponent<Fire> ().projectileList.Add (projectile);
+	
 	}
 
 }

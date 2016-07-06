@@ -45,17 +45,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Fire.cs" />
-     <Compile Include="Assets\Scripts\Hit.cs" />
      <Compile Include="Assets\Scripts\InitWeaponTagsAndColliders.cs" />
-     <Compile Include="Assets\Scripts\Player_Network.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\Fire.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\Player_Network.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\Weapon.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\moveProjectile.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\pickUpWeapon.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\playerStats.cs" />
      <Compile Include="Assets\Scripts\Projectile.cs" />
-     <Compile Include="Assets\Scripts\Weapon.cs" />
      <Compile Include="Assets\Scripts\detectCollisions.cs" />
-     <Compile Include="Assets\Scripts\moveProjectile.cs" />
-     <Compile Include="Assets\Scripts\pickUpWeapon.cs" />
-     <Compile Include="Assets\Scripts\playerStats.cs" />
-     <Compile Include="Assets\Scripts\playerTable.cs" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
      <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />

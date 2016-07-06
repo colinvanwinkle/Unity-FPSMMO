@@ -30,6 +30,8 @@ using System.Collections;
 		bullet.transform.position = origin;
 		bullet.transform.localScale = new Vector3 (.1f, .1f, .1f);
 		bullet.AddComponent<detectCollisions> ();
+		bullet.GetComponent<detectCollisions> ().dmg = damage;
+		bullet.GetComponent<MeshRenderer> ().enabled = false;
 		bullet.name = "projectile_" + owner.name;
 
 	

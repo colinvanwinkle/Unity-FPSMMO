@@ -11,33 +11,34 @@ public class pickUpWeapon : NetworkBehaviour {
 	public GameObject activeWeapon;
 
 
-
 	//instance variables to track how long key has been pressed
 	bool isKeyDown = false;
 	float timeStarted = 0f;
 
 
 	//screen refers to camera object, FPSCharacter
-	GameObject screen;
+	 GameObject screen;
 	//refers to the weapon that if 'F' key is held, character will pick it up
 	GameObject currentPotentialWeap = null;
-
+	[SyncVar] GameObject model;
 	// Use this for initialization
 	void Start(){
 
+		if (!isLocalPlayer)
+			return;
+		
 		//makes object easier to access in later code
-		screen = GameObject.Find("FirstPersonCharacter");
-	
-
-
-	
+		screen = this.gameObject.transform.GetChild(0).gameObject;
 	}
 
 	// Update is called once per frame
 	void Update () {
 
 	
+		if (!isLocalPlayer)
+			return;
 
+		//THIS BLOCK ACKNOWLEDGES WEAPONS ON THE GROUND
 
 		//sends a sphere forward from the camera and returns an array of all the objects hit
 		RaycastHit[] weaponsFound = Physics.SphereCastAll(new Ray(screen.transform.position, screen.transform.forward), 1);
@@ -68,10 +69,11 @@ public class pickUpWeapon : NetworkBehaviour {
 
 			}
 		}
-
+				
 	
+		//______________________________________________________________________________________________________________________________
 
-
+		//THIS BLOCK IS RESPONSIBLE FOR USER COMMANDS FOR PICKING THE WEAPON UP
 	
 			//starts timing when 'F' key is pressed down
 			if (Input.GetKeyDown ("f") && !isKeyDown) {
@@ -85,52 +87,13 @@ public class pickUpWeapon : NetworkBehaviour {
 			isKeyDown = false;
 			timeStarted = 0;
 
-			if (activeWeapon != null) {
-				activeWeapon.AddComponent<Rigidbody> ();
-				activeWeapon.transform.parent = GameObject.Find ("weapons_on_ground").transform;
-			}
 
-
-
+			CmdDrawWeap (currentPotentialWeap, activeWeapon);
 			activeWeapon = currentPotentialWeap;
 
-			print (currentPotentialWeap);
-
-			//destroys rigidbody so weapon doesn't fall down when we pick it up
-			Destroy(activeWeapon.GetComponent<Rigidbody>());
-
-			//makes the active weapon a child of the character
-			activeWeapon.transform.SetParent (screen.transform);
-
-
-			//resets 
 			currentPotentialWeap = null;
 
-			//makes variables we will use to change the roation and position of object
-			//so that it is positioned properly in front of camera
-			Vector3 weaponRotation = Vector3.zero;
-			Vector3 weaponPosition = Vector3.zero;
-
-			switch (activeWeapon.name) {
-
-			case "mace":
-				weaponRotation = new Vector3 (310f, 176f, 180f);
-				weaponPosition = new Vector3 (0.74f, -0.91f, 1.39f);
-				break;
-
-			case "handgun":
-				weaponRotation = new Vector3 (353.8f, 95.5801f, 5.80f);
-				weaponPosition = new Vector3 (0.95f, -0.89f, 1.68f);
-				break;
-			case "Rifle":
-				weaponRotation = new Vector3 (-5.33f, 85.32f, 0.9f);
-				weaponPosition = new Vector3 (.2f, -0.47f, 1.5f);
-				break;
-			}
-
-			//changes the weapon's properties
-			activeWeapon.transform.localPosition = weaponPosition;
-			activeWeapon.transform.localEulerAngles = weaponRotation;
+	
 
 			//resets the variables if the key is let up before the time threshold(.5 sec)
 		} else if (Input.GetKeyUp ("f")) {
@@ -144,6 +107,58 @@ public class pickUpWeapon : NetworkBehaviour {
 
 	}
 
+
+	[Command]
+	void CmdDrawWeap(GameObject weapon, GameObject oldWeapon){
+		RpcDrawWeap (weapon, oldWeapon);
+	}
+
+
+	[ClientRpc]
+	void RpcDrawWeap(GameObject weapon, GameObject oldWeapon){
+
+		//if we currently have a weapon, we want to add a rigidbody so we can drop it to the ground and set
+		//its parent again
+		if (oldWeapon != null) {
+			oldWeapon.AddComponent<Rigidbody> ();
+			oldWeapon.transform.parent = GameObject.Find ("weapons_on_ground").transform;
+		}
+
+		//destroy the rigidbody only if there exists one
+		if (weapon.GetComponent<Rigidbody>() != null)
+		Destroy(weapon.GetComponent<Rigidbody>());
+
+		//sets the parent of the new weapon 
+		weapon.transform.SetParent (this.transform.GetChild(0));
+
+
+		//calibrates the rotation and position of these guns relative to the camera of the user.
+		//even though this code executes on every user, this.transform still refers to the Command executer.
+		Vector3 weaponRotation = Vector3.zero;
+		Vector3 weaponPosition = Vector3.zero;
+
+		switch (weapon.name) {
+
+		case "mace":
+			weaponRotation = new Vector3 (310f, 176f, 180f);
+			weaponPosition = new Vector3 (0.74f, -0.91f, 1.39f);
+			break;
+
+		case "handgun":
+			weaponRotation = new Vector3 (353.8f, 95.5801f, 5.80f);
+			weaponPosition = new Vector3 (0.95f, -0.89f, 1.68f);
+			break;
+		case "Rifle":
+			weaponRotation = new Vector3 (-5.33f, 85.32f, 0.9f);
+			weaponPosition = new Vector3 (.2f, -0.47f, 1.5f);
+			break;
+		}
+
+		//changes the weapon's properties
+		weapon.transform.localPosition = weaponPosition;
+		weapon.transform.localEulerAngles = weaponRotation;
+	
+	}
 
 
 

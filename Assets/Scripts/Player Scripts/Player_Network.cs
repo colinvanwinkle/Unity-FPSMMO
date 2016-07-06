@@ -28,11 +28,20 @@ public class Player_Network : NetworkBehaviour {
 		playerTransform.position = new Vector3 (250, 11, 170);
 		this.gameObject.tag = "Enemy";
 
+		int id = Random.Range (1, 100);
+		this.name = this.name + id;
+		playerStats.players.Add (this.gameObject.name, 100);
+
+
+
 
 		if (!isLocalPlayer) {
-			FPSCamera.SetActive (false);
+			FPSCamera.GetComponent<Camera> ().enabled = false;
+			FPSCamera.GetComponent<AudioListener>().enabled = false;
+
 			characterController.enabled = false;
 			FPSController.enabled = false;
+
 		}
 	}
 	/*

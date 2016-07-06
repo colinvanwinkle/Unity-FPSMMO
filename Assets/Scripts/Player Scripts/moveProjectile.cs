@@ -19,12 +19,27 @@ public class moveProjectile : NetworkBehaviour {
 		foreach (Projectile projectile in projectileList.ToArray()){
 		
 			//moves the projectile in it's direction
-			projectile.bullet.transform.position += projectile.direction / 100 * projectile.bulletSpeed;
-			if (Vector3.Distance (projectile.bullet.transform.position, this.transform.position) >= projectile.range) {
-				Destroy (projectile.bullet);
-				projectileList.Remove (projectile);
-			}
 
+			if (projectile.bullet == null){
+				projectileList.Remove (projectile);
+				return;
+			}
+				
+				projectile.bullet.transform.position += projectile.direction / 100 * projectile.bulletSpeed;
+
+				if (Vector3.Distance (projectile.bullet.transform.position, projectile.origin) > 5)
+					projectile.bullet.GetComponent<MeshRenderer> ().enabled = true;
+
+
+		
+			
+				if (Vector3.Distance (projectile.bullet.transform.position, this.transform.position) >= projectile.range) {
+					Destroy (projectile.bullet);
+					projectileList.Remove (projectile);
+				}
+
+
+	
 
 
 			//interpolates whether a bullet will hit or not
@@ -39,7 +54,6 @@ public class moveProjectile : NetworkBehaviour {
 				projectile.bullet.GetComponent<detectCollisions> ().OnTriggerEnter (rayFromProjectileForward.collider);
 
 			}
-
 
 		
 
