@@ -38,7 +38,6 @@ public class Fire : NetworkBehaviour {
 			if (weapon.currentWeapon != GetComponent<pickUpWeapon> ().activeWeapon) {
 				weapon.currentWeapon = GetComponent<pickUpWeapon> ().activeWeapon;
 				weapon.initWeaponInfo ();
-
 			}
 
 
@@ -65,7 +64,7 @@ public class Fire : NetworkBehaviour {
 
 
 				
-			weapon.ammo = weapon.ammo - 1;
+			weapon.ammo--;
 			print ("Ammo: " + weapon.ammo);
 
 		} else if (Input.GetKeyDown ("r") && !weapon.isReloading() && weapon.ammo < weapon.maxAmmoCapacity) {
@@ -76,6 +75,8 @@ public class Fire : NetworkBehaviour {
 		timeSinceLastFire = Time.time - timeOfLastFire;
 
 		//expands crosshair
+
+        if (weapon != null)
 		GameObject.Find ("Crosshair").transform.localScale =  .017f * new Vector3 (spreadDegree * weapon.spreadFactor, spreadDegree * weapon.spreadFactor, 0);
 
 

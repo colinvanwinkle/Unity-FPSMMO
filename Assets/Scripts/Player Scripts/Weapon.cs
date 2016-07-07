@@ -21,6 +21,9 @@ public class Weapon : NetworkBehaviour{
 	public int ammo;
 	public int maxAmmoCapacity;
 	public float range;
+    public int ID;
+    public string ammoType;
+    
 
 	bool isAuto = false;
 	bool reloading = false;
@@ -52,18 +55,23 @@ public class Weapon : NetworkBehaviour{
 				bulletSpeed = 100;
 				spreadThresh = .3f;
 				spreadFactor = 1;
+                ammoType = "ammo_handgun";
+                ID = 1;
+                
 				break;
 
 			case "Rifle":
 				fireSpeed = .07f;
 				reloadTime = 2.0f;
 				isAuto = true;
-				maxAmmoCapacity = 200;
+				maxAmmoCapacity = 20;
 				range = 80;
 				weaponDamage = 15;
 				bulletSpeed = 200;
 				spreadThresh = .1f;
 				spreadFactor = 5;
+                ammoType = "ammo_Rifle";
+                ID = 2;
 				break;
 			}
 
@@ -105,6 +113,20 @@ public class Weapon : NetworkBehaviour{
 	public bool isAutomatic(){
 		return isAuto;
 	}
+
+    public static int getMaxAmmo(string weapon)
+    {
+        switch (weapon) { 
+            case "handgun":
+            return 12;
+
+            case "Rifle":
+                return 20;
+
+    }
+
+        return -1;
+    }
 
 
 

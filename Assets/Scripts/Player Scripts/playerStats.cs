@@ -8,8 +8,13 @@ public class playerStats : NetworkBehaviour {
 	//when we make inventory we might store an array for health, inventory [0] = health
 	//[1] = #of grenades (type1), [2] = # of grenades (type 2)
 	 public static Dictionary<string, int> players = new Dictionary<string, int>();
+    public Inventory inventory;
 
 
+    void Awake()
+    {
+        inventory = GetComponent<Inventory>();
+    }
 
 	//sends command to all clients to damage this player
 	[Command]
