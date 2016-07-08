@@ -1,13 +1,12 @@
-﻿using UnityEngine;
+﻿//We will keep track of the players health and perhaps other info here.
+using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
 using System.Collections.Generic;
 using UnityEngine.UI;
 public class playerStats : NetworkBehaviour {
 
-    //when we make inventory we might store an array for health, inventory [0] = health
-    //[1] = #of grenades (type1), [2] = # of grenades (type 2)
-    //public static Dictionary<string, int> players = new Dictionary<string, int>();
+
 
     [SyncVar]
     private int health = 1000;
@@ -16,14 +15,13 @@ public class playerStats : NetworkBehaviour {
 	//sends command to all clients to damage this player
 	[Command]
 	public void CmddamagePlayer(GameObject playerHit, GameObject playerThatHit, int dmg){
+		//subtract the daamge from the players health
         health -= dmg;
 		RpcdamagePlayer (playerHit, playerThatHit, dmg);
 
-
 	}
 
-	//finds the player's health in the dictionary and deudcts the dmg from it.
-	//This command is executed on all clients.
+	//this is called on all clients
 	[ClientRpc]
 	public void RpcdamagePlayer(GameObject playerHit, GameObject playerThatHit, int dmg){
 
@@ -35,6 +33,8 @@ public class playerStats : NetworkBehaviour {
 			GameObject.Find ("Text").GetComponent<Text> ().text = GameObject.Find ("Text").GetComponent<Text> ().text + "\n" + player.name + ": " + player.GetComponent<playerStats>().health;
 		}
         
+
+			//destroys player if its health is 0
             if (health <= 0)
 			Destroy (playerHit);
 		

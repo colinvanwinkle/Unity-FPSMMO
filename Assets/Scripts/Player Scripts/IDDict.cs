@@ -13,18 +13,6 @@ public class IDDict : MonoBehaviour {
     public Dictionary<int, string> objectNames = new Dictionary<int, string>();
 
 
-    //object type enum
-    enum ObjectType
-    {
-        Weapon,
-        Ammo,
-        Armor,
-        Spell,
-        Item
-    }
-
-   
-
   
     //this will hold the IDs of all the objects in our game
     //whenever we want to add an object to the game, we need to add to this list

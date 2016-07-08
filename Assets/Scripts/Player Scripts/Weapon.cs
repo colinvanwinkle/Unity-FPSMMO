@@ -14,7 +14,6 @@ public class Weapon : NetworkBehaviour{
 	
 	public GameObject currentWeapon;
 	public int weaponDamage;
-	//fireSpeed is time it takes in between fire (lower values mean faster fire rate)
 	public float fireSpeed;
 	public float bulletSpeed;
 	public float reloadTime;
@@ -37,11 +36,11 @@ public class Weapon : NetworkBehaviour{
 
 		//gets the active weapon from the pickUpWeapon script
 		pickUpWeapon weaponScript = GetComponent<pickUpWeapon> ();
-		print (weaponScript.activeWeapon);
 		currentWeapon = weaponScript.activeWeapon;
 
 
 		//assigns the instance variables depending on the weapon
+		//every time we add a weapon to the game we need to add to this list
 		if (currentWeapon != null) {
 			switch (currentWeapon.name) {
 
@@ -92,10 +91,14 @@ public class Weapon : NetworkBehaviour{
 		}
 	}
 
+
+	//reloads the weapon
 	public void reload(){
 		reloading = true;
 		timeStartReload = Time.time;
 	}
+
+	//return whether we have ammo
 	public bool hasAmmo(){
 		if (ammo > 0)
 			return true;
@@ -103,6 +106,8 @@ public class Weapon : NetworkBehaviour{
 			return false;
 	}
 
+
+	//returns whether the weapon is reloading
 	public bool isReloading(){
 		if (reloading)
 			return true;
@@ -110,17 +115,18 @@ public class Weapon : NetworkBehaviour{
 			return false;
 	}
 
+	//returns whether the gun is automatic
 	public bool isAutomatic(){
 		return isAuto;
 	}
 
+	//every time wwe add a weapon to the game we need to do this
     public static int getMaxAmmo(string weapon)
     {
         switch (weapon) { 
             case "handgun":
-            return 12;
-
-            case "Rifle":
+            	return 12;
+			case "Rifle":
                 return 20;
 
     }

@@ -10,11 +10,7 @@ public class Player_Network : NetworkBehaviour {
 	public GameObject FPSCamera;
 	public CharacterController characterController;
 	public FirstPersonController FPSController;
-
-
-	[SyncVar] private Vector3 syncPosition;
 	private Transform playerTransform;
-	public float movementLerpRate = 60;
 
 
 	//rotation vars
@@ -25,13 +21,14 @@ public class Player_Network : NetworkBehaviour {
 		//sets the tag of each player spawned in as "Enemy" 
 		//this may change in the future as we may add party members and friends
 		playerTransform = GetComponent<Transform> ();
+
+		//puts players at this location (will change)
 		playerTransform.position = new Vector3 (250, 11, 170);
 		this.gameObject.tag = "Enemy";
 
 		//appends a random number to the end of the player name
 		int id = Random.Range (1, 100);
 		this.name = this.name + id;
-		//playerStats.players.Add (this.gameObject.name, 1000);
 
 
 		//disables character if we are not that controller
@@ -44,52 +41,6 @@ public class Player_Network : NetworkBehaviour {
 
 		}
 	}
-	/*
-	void FixedUpdate(){
-		LerpPosition ();
-		sendPosition ();
-		LerpRotation ();
-		sendRotation ();
-	}
 
-	private void LerpPosition(){
-		if (!isLocalPlayer) {
-			playerTransform.position = Vector3.Lerp (playerTransform.position, syncPosition, Time.deltaTime * movementLerpRate);
-		}
-	}
-
-	[Command]
-	private void CmdProvidePosToServer(Vector3 Position){
-		syncPosition = Position;
-	}
-
-	[ClientCallback]
-	private void sendPosition(){
-		if (isLocalPlayer)
-			CmdProvidePosToServer (playerTransform.position);
-	}
-
-	//FOR ROTATION
-	private void LerpRotation(){
-
-		if (!isLocalPlayer) {
-			playerTransform.rotation = Quaternion.Lerp (playerTransform.rotation, syncPlayerRotation, Time.deltaTime * rotationLerpRate);
-		}
-	}
-
-
-	[Command]
-	private void CmdProvideRotationToServer(Quaternion playerRotation){
-		syncPlayerRotation = playerRotation;
-	}
-
-
-	[ClientCallback]
-	private void sendRotation(){
-		if (!isLocalPlayer)
-			CmdProvideRotationToServer (playerTransform.rotation);
-	}
-*/
-	// Update is called once per frame
 
 }

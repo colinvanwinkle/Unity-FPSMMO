@@ -11,7 +11,10 @@ public class Fire : NetworkBehaviour {
 
 	//list we will add projectiles to
 	public List<Projectile> projectileList = new List<Projectile>();
+
 	bool fireable = true;
+
+	//use these to keep track of firing times to determine whether or not we can shoot
 	float timeSinceLastFire;
 	float timeOfLastFire;
  	Weapon weapon;
@@ -25,14 +28,11 @@ public class Fire : NetworkBehaviour {
 
 		if (!isLocalPlayer)
 			return;
-
-		//checks if mouse button is clicked				//check if it is held and an automatic (weapon must not be null beacuse we are using weapon reference)
-		if ((Input.GetKeyDown("p") ||Input.GetMouseButtonDown (0) || (weapon != null && Input.GetMouseButton (0) && weapon.isAutomatic ())) && fireable) {
+	
+		//checks if mouse button is clicked		//check if it is held and an automatic (weapon must not be null beacuse we are using weapon reference)
+		if ((Input.GetMouseButtonDown (0) || (weapon != null && Input.GetMouseButton (0) && weapon.isAutomatic ())) && fireable) {
 			
-			//gets the weapon script
 			weapon = GetComponent<Weapon> ();
-
-
 
 			//gets the characteristics of the current weapon if a new weapon is being used
 			if (weapon.currentWeapon != GetComponent<pickUpWeapon> ().activeWeapon) {
@@ -42,10 +42,9 @@ public class Fire : NetworkBehaviour {
 
 
 			//we want to exit this update() if user has no weapon
-			if (weapon.currentWeapon == null) {
-				print ("no weapon");
+			if (weapon.currentWeapon == null) 
 				return;
-			}
+			
 				
 			//sets this weapon to be last weapon fired
 			weaponAtLastFire = weapon;
@@ -60,16 +59,16 @@ public class Fire : NetworkBehaviour {
 			//add a projectile to every players screen in the game
 			CmdAddProjectile (weapon.weaponDamage, weapon.range, weapon.bulletSpeed, camera.transform.position + camera.transform.forward, calculateDir (camera), this.gameObject);
 
-			
 
-
-				
+			//lose 1 ammmo
 			weapon.ammo--;
 			print ("Ammo: " + weapon.ammo);
 
+			//reloads weapon if were not already reloading and we have less that full ammo
 		} else if (Input.GetKeyDown ("r") && !weapon.isReloading() && weapon.ammo < weapon.maxAmmoCapacity) {
 			weapon.reload ();
 			fireable = false;
+
 		}// end of user input
 
 		timeSinceLastFire = Time.time - timeOfLastFire;
@@ -80,13 +79,9 @@ public class Fire : NetworkBehaviour {
 		GameObject.Find ("Crosshair").transform.localScale =  .017f * new Vector3 (spreadDegree * weapon.spreadFactor, spreadDegree * weapon.spreadFactor, 0);
 
 
-		//gets the weapon object(have to put this line here because if user hasn't
-		//picked up weapon, weapon variable will not be set and this will generate null
-		//pointer exception.
+
 
 		//if we have a weapon, it hasn't been fired since its "cooldown" time, and it has ammo, we can fire it.
-
-
 		//(eventually we can remove &&weapon.currentweapon because all weapons will have a current weapon)
 		if (weapon != null && weapon.currentWeapon != null && timeSinceLastFire >= weapon.fireSpeed && weapon.hasAmmo () && !weapon.isReloading()) {
 			fireable = true;
@@ -102,7 +97,7 @@ public class Fire : NetworkBehaviour {
 
 	void FixedUpdate(){
 		//decreases the width of the spray if enough time has passed since last shot
-		if (weapon != null && timeSinceLastFire > weapon.spreadThresh && spreadDegree > 0 && Time.time - timeLastSpreadDec > 0.05f){
+		if (weapon != null && timeSinceLastFire > weapon.spreadThresh && spreadDegree > 0 && Time.time - timeLastSpreadDec > weapon.spreadThresh / 2){
 			spreadDegree--;
 		timeLastSpreadDec = Time.time;
 		}
@@ -146,7 +141,7 @@ public class Fire : NetworkBehaviour {
 		RpcAddProjectile( dmg,  range,  speed,  origin,  dir,  owner);
 	}
 
-	//creates a projectile and puts it in each users projectile list
+	//creates a projectile on each client and puts it in each users projectile list
 	[ClientRpc]
 	void RpcAddProjectile(int dmg, float range, float speed, Vector3 origin, Vector3 dir, GameObject owner){
 		Projectile projectile = ScriptableObject.CreateInstance ("Projectile") as Projectile;

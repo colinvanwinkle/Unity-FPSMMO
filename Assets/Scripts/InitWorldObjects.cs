@@ -21,6 +21,7 @@ public class InitWorldObjects : NetworkBehaviour  {
 
      ammo_on_ground = GameObject.Find("ammo_on_ground").transform;
 
+		//adds a boxcollider and Item tag to each ammo object on the ground
         for (int i = 0; i < ammo_on_ground.childCount; i++)
         {
             Transform ammo = ammo_on_ground.GetChild(i);

@@ -9,16 +9,9 @@ public class Inventory : MonoBehaviour {
     GameObject invText;
 
     void Start () {
+		//gets the text object we will use to print inventory info
         invText = GameObject.Find("InventoryInfo");
     }
-
-
-
-    
-        
- 
-
-    
 
 
     public void addToInventory(int ID, int multiplicity)
@@ -47,6 +40,7 @@ public class Inventory : MonoBehaviour {
             inventory[currInvIdx, 1]+= multiplicity;
         }
 
+		//finds the next slot index by incrementing the current index until we find a slot with a 0 (no object)
         while (currInvIdx < inventory.GetLength(0) && inventory[currInvIdx, 0] != 0)
             currInvIdx++;
 
@@ -54,6 +48,7 @@ public class Inventory : MonoBehaviour {
 
         invText.GetComponent<Text>().text = "";
 
+		//updates inventory info every time we add
         for (int i = 0; i < inventory.GetLength(0); i++)
         {
             if (inventory[i, 0] != 0)

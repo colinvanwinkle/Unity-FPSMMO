@@ -16,17 +16,14 @@ public class pickUpWeapon : NetworkBehaviour
     bool isKeyDown = false;
     float timeStarted = 0f;
 
-
     //screen refers to camera object, FPSCharacter
     GameObject screen;
     //refers to the weapon that if 'F' key is held, character will pick it up
     GameObject currentPotentialWeap = null;
-    [SyncVar]
-    GameObject model;
-    // Use this for initialization
+
+
     void Start()
     {
-
         if (!isLocalPlayer)
             return;
 
@@ -112,10 +109,10 @@ public class pickUpWeapon : NetworkBehaviour
             }
             else if (inventory.isFull())
             {
-                //todo
+				print ("inventory is fulL!");
             }
             else
-            {
+            {	//we have no weapon equipped anwe want to equip this one
                 activeWeapon = currentPotentialWeap;
                 currentPotentialWeap = null;
                 CmdDrawWeap(activeWeapon);
@@ -124,19 +121,19 @@ public class pickUpWeapon : NetworkBehaviour
 
 
 
-            //resets the variables if the key is let up before the time threshold(.5 sec)
         }
+
+		//resets the variables if the key is let up before the time threshold(.5 sec)
         else if (Input.GetKeyUp("f"))
         {
             isKeyDown = false;
             timeStarted = 0;
         }
-
-
-
+			
 
 
     }
+
 
 
     [Command]
@@ -189,6 +186,8 @@ public class pickUpWeapon : NetworkBehaviour
         RpcDestroyWeap(weapon);
     }
 
+	//Destroys the weap on all clients when it is picked up and put into
+	//inventory
     [ClientRpc]
     void RpcDestroyWeap(GameObject weapon)
     {

@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.Networking;
 
-//NOTES. IMPLEMENTS NEW METHOD OF FINDING WEAPON (USING X # OF RAYS TO SEE WHICH OBJECT IS IN FIELD OF VIEW MORE)
+//NOTES. IMPLEMENT NEW METHOD OF FINDING WEAPON (USING X # OF RAYS TO SEE WHICH OBJECT IS IN FIELD OF VIEW MORE)
 //FOR SPAWNING AMMO,WAEPONS, MAKE THEM BE AT ALL LOCATIONS BUT DISABLE THEIR MESHES
 
     //EVERY TIME WE ADD AMMO, WE NEED TO UPDATE IDDICT AND MAXAMMO() IN WEAPON
@@ -35,7 +35,7 @@ public class pickUpItem : NetworkBehaviour
         //sends a sphere forward from the camera and returns an array of all the objects hit
         RaycastHit[] itemsFound = Physics.SphereCastAll(new Ray(screen.transform.position, screen.transform.forward), 1);
 
-        //cycles through all the objects hit and calculates the distance from the character to the weapon
+        //cycles through all the objects hit and calculates the distance from the character to the item
         for (int i = 0; i < itemsFound.Length; i++)
         {
 
@@ -108,7 +108,7 @@ public class pickUpItem : NetworkBehaviour
             }
             else
             {
-                //TODO - GENERATE ERROR
+                //TODO - GENERATE ERROR if inventory is full
             }
         }
         //let up too soon
@@ -124,11 +124,12 @@ public class pickUpItem : NetworkBehaviour
 
     }//end of update
 
+
+	//calculates a random amount of ammo to add to the player's inventory
     int calculateRandomAmmo(string weapon)
     {
-        int maxAmmo = (Random.Range(1, Weapon.getMaxAmmo(weapon)));
-        print("max ammo is " + maxAmmo);
-        return maxAmmo;
+       
+		return Random.Range(1, Weapon.getMaxAmmo(weapon));
     }
 
     [Command]
@@ -137,6 +138,7 @@ public class pickUpItem : NetworkBehaviour
         RpcDestroyItem(item);
     }
 
+	//destroys the item picked up on all clients
     [ClientRpc]
     void RpcDestroyItem(GameObject item)
     {
