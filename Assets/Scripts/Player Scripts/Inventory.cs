@@ -45,35 +45,50 @@ public class Inventory : MonoBehaviour {
             currInvIdx++;
 
 
+		updateInvText ();
 
-        invText.GetComponent<Text>().text = "";
-
-		//updates inventory info every time we add
-        for (int i = 0; i < inventory.GetLength(0); i++)
-        {
-            if (inventory[i, 0] != 0)
-                invText.GetComponent<Text>().text = invText.GetComponent<Text>().text + "\n" + inventory[i, 0] + " (" + GetComponent<IDDict>().getObjectNameByID(inventory[i, 0]) + ") " + " x " + inventory[i, 1];
-        }
 
 
     }
 
 
     //removes item at inventory slot from invenorntory
-    public void removeFromInventory(int inventorySlot)
+	public void removeFromInventory(string item)
     {
-       
-        inventory[inventorySlot, 0] = 0;
-        currInvIdx = inventorySlot;
+		int itemID = GetComponent<IDDict> ().getIDByObjectName (item);
+		int slot = getItemSlot (itemID);
+
+        inventory[slot, 0] = 0;
+		inventory [slot, 1] = 0;
+        currInvIdx = slot;
+
+		updateInvText ();
+
 
     }
 
+	//removes speicifed number of items at inventory slot from invenorntory
+	public void removeAmountFromInventory(string item, int amount)
+	{
+		int itemID = GetComponent<IDDict> ().getIDByObjectName (item);
+		int slot = getItemSlot (itemID);
 
-    //returns the contents of the inventory
-    public int[,] getInventory()
-    {
-        return inventory;
-    }
+		//subtract the amount of items from the slot of the inventory
+		inventory [slot, 1] -= amount;
+
+		//if we got rid of more items that we had, reset the inventory slot
+		if (inventory [slot, 1] <= 0) {
+			inventory [slot, 0] = 0;
+			inventory [slot, 1] = 0;
+			currInvIdx = slot;
+
+		}
+
+		updateInvText ();
+			
+	}
+
+
 
 
     //returns whether or not the inventory is full
@@ -90,12 +105,31 @@ public class Inventory : MonoBehaviour {
     }
 
 
+	//returns the contents of the inventory
+	public int[,] getInventory()
+	{
+		return inventory;
+	}
+
+
+	//returns the amount of specified items in inventory 
+	public int getNumberOfItem(string item){
+		int slotNum = getItemSlot (GetComponent<IDDict> ().getIDByObjectName (item));
+		if (slotNum == -1)
+			return 0;
+		else {
+			return inventory [slotNum, 1];
+		}
+
+	}
+
+
     //HELPER METHODS ----------------------------------------------------------------------------------------------------------------------
 
-
+	//user this method for reload implementation
      //returns the slot at which the item with given ID is found,
      //return -1 if it is not found.
-    private int getItemSlot(int ID)
+	private int getItemSlot(int ID)
     {
         for (int i = 0; i < inventory.GetLength(0); i++)
         {
@@ -104,4 +138,18 @@ public class Inventory : MonoBehaviour {
         }
         return -1;
     }
+
+	private void updateInvText(){
+		//updates inventory info every time we add
+
+		invText.GetComponent<Text>().text = "";
+
+		for (int i = 0; i < inventory.GetLength(0); i++)
+		{
+			if (inventory[i, 0] != 0)
+				invText.GetComponent<Text>().text = invText.GetComponent<Text>().text + "\n" + inventory[i, 0] + " (" + GetComponent<IDDict>().getObjectNameByID(inventory[i, 0]) + ") " + " x " + inventory[i, 1];
+		}
+	}
+
+
 }

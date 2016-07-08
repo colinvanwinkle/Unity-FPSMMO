@@ -7,7 +7,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
-
+using UnityEngine.UI;
 
 
 public class Weapon : NetworkBehaviour{
@@ -68,7 +68,7 @@ public class Weapon : NetworkBehaviour{
 				weaponDamage = 15;
 				bulletSpeed = 200;
 				spreadThresh = .1f;
-				spreadFactor = 5;
+				spreadFactor = 3;
                 ammoType = "ammo_Rifle";
                 ID = 2;
 				break;
@@ -78,15 +78,42 @@ public class Weapon : NetworkBehaviour{
 
 
 		}
-	}
+	}//end of initWeaponInfo()
+
+
 
 	//checks if reloading is done
 	void Update(){
 		
 		if (reloading) {
+			//if we have exceeded our reload time we want to add ammo back
 			if (Time.time - timeStartReload >= reloadTime) {
 				reloading = false;
-				ammo = maxAmmoCapacity;
+
+				//keeps a count of the ammo we had befre we reloaded
+				int ammoBeforeReload = ammo;
+
+				Inventory inventory = GetComponent<Inventory> ();
+
+				//gets amount of ammo in our inventory
+				int ammoCount = inventory.getNumberOfItem (ammoType);
+				//if we have ammo in our inventory
+				if (ammoCount > 0){
+					//if we have more ammo in our inventory that it would take to
+					//reload our gun, we put our gun at max capacity
+					if (ammoCount >= maxAmmoCapacity - ammo) 
+						ammo = maxAmmoCapacity;
+					else 
+						//else we just increase the ammo in our
+						//gun by the amount in our inventory
+						ammo += ammoCount;
+					//removes the ammo we used from out inventory
+					inventory.removeAmountFromInventory (ammoType, ammo - ammoBeforeReload);
+					GameObject.Find ("AmmoText").GetComponent<Text> ().text = "Ammo: " + ammo;
+				}
+				else{
+					print ("you have no ammo!");
+				}		
 			}
 		}
 	}
@@ -96,6 +123,7 @@ public class Weapon : NetworkBehaviour{
 	public void reload(){
 		reloading = true;
 		timeStartReload = Time.time;
+
 	}
 
 	//return whether we have ammo

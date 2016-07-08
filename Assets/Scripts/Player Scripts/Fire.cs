@@ -6,6 +6,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class Fire : NetworkBehaviour {
 
@@ -22,7 +23,16 @@ public class Fire : NetworkBehaviour {
 
 	int spreadDegree;
 	float timeLastSpreadDec;
-	
+	Text ammoText;
+
+
+	void Start(){
+
+		if (!isLocalPlayer)
+			return;
+		
+		ammoText = GameObject.Find ("AmmoText").GetComponent<Text> ();
+	}
 	//need to also implement fire speed, reload time, check if has ammo
 	void Update () {
 
@@ -62,11 +72,11 @@ public class Fire : NetworkBehaviour {
 
 			//lose 1 ammmo
 			weapon.ammo--;
-			print ("Ammo: " + weapon.ammo);
+			ammoText.text = "Ammo: " + weapon.ammo;
 
 			//reloads weapon if were not already reloading and we have less that full ammo
-		} else if (Input.GetKeyDown ("r") && !weapon.isReloading() && weapon.ammo < weapon.maxAmmoCapacity) {
-			weapon.reload ();
+		} else if (Input.GetKeyDown ("r") && !weapon.isReloading() && weapon.ammo < weapon.maxAmmoCapacity && GetComponent<Inventory>().getNumberOfItem(weapon.ammoType) > 0) {
+			weapon.reload(); 
 			fireable = false;
 
 		}// end of user input
@@ -87,7 +97,7 @@ public class Fire : NetworkBehaviour {
 			fireable = true;
 		}
 		//else, if we have a weapon, but it doesn't have ammo and isn't currently reloading, we should reload it.
-		else if (weapon != null  && weapon.currentWeapon != null && !weapon.hasAmmo() && !weapon.isReloading()) {
+		else if (weapon != null  && weapon.currentWeapon != null && !weapon.hasAmmo() && !weapon.isReloading() && GetComponent<Inventory>().getNumberOfItem(weapon.ammoType) > 0){
 			weapon.reload();
 			fireable = false;
 		}
