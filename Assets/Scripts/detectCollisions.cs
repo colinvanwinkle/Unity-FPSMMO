@@ -10,17 +10,31 @@ public class detectCollisions : NetworkBehaviour {
 	public int dmg = 0;
 
 	// When a bullet collides with an enemy, call the function that damages a player.
-	public void OnTriggerEnter(Collider col){
+	public void OnCollisionEnter(Collision col){
 
 
 		//substring(11) represents the owner of the bullets name....as it is "projectile_<name>"
 		if (col.gameObject.tag.Equals("Enemy")){
-			GameObject.Find(this.name.Substring(11)).GetComponent<playerStats>().CmddamagePlayer(col.gameObject, GameObject.Find(this.name.Substring(11)), dmg);
+            print("direct hit!");
+            col.gameObject.GetComponent<playerStats>().CmddamagePlayer(col.gameObject, GameObject.Find(this.name.Substring(11)), dmg);
 		}
 
 		Destroy (this.gameObject);
 			
 	}
+
+    public void interpolatedHit(Collider col)
+    {
+        //substring(11) represents the owner of the bullets name....as it is "projectile_<name>"
+        if (col.gameObject.tag.Equals("Enemy"))
+        {
+            print("interpolated hit!");
+            col.gameObject.GetComponent<playerStats>().CmddamagePlayer(col.gameObject, GameObject.Find(this.name.Substring(11)), dmg);
+            
+        }
+
+        Destroy(this.gameObject);
+    }
 
 
 

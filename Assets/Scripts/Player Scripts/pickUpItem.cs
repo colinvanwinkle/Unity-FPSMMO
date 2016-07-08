@@ -33,29 +33,29 @@ public class pickUpItem : NetworkBehaviour
         //THIS BLOCK ACKNOWLEDGES ITEMS ON THE GROUND
 
         //sends a sphere forward from the camera and returns an array of all the objects hit
-        RaycastHit[] weaponsFound = Physics.SphereCastAll(new Ray(screen.transform.position, screen.transform.forward), 1);
+        RaycastHit[] itemsFound = Physics.SphereCastAll(new Ray(screen.transform.position, screen.transform.forward), 1);
 
         //cycles through all the objects hit and calculates the distance from the character to the weapon
-        for (int i = 0; i < weaponsFound.Length; i++)
+        for (int i = 0; i < itemsFound.Length; i++)
         {
 
             //gets distance from player to the wewapon
-            float distCharToWeapon = Vector3.Distance(weaponsFound[i].collider.gameObject.transform.position, this.transform.position);
+            float distCharToItem = Vector3.Distance(itemsFound[i].collider.gameObject.transform.position, this.transform.position);
 
-            float distCharToCurrentPotentialWeapon = 0;
+            float distCharToCurrentPotentialItem = 0;
 
             //gets the distance to the weapon at this point in times deemed as the current potential weapoon
             if (currentPotentialItem != null)
-                distCharToCurrentPotentialWeapon = Vector3.Distance(currentPotentialItem.transform.position, this.transform.position);
+                distCharToCurrentPotentialItem = Vector3.Distance(currentPotentialItem.transform.position, this.transform.position);
 
             //only continues if we have a weapon object and we are close enough to the object
-            if (weaponsFound[i].collider.tag.Equals("Item") && distCharToWeapon < 3)
+            if (itemsFound[i].collider.tag.Equals("Item") && distCharToItem < 3)
             {
 
                 //changes current potential weapon to this weapon if it is closer to the player than the current potentiual weapon and disregards the weapon that the player is holding 
-                if ((currentPotentialItem == null || distCharToWeapon < distCharToCurrentPotentialWeapon))
+                if ((currentPotentialItem == null || distCharToItem < distCharToCurrentPotentialItem))
                 {
-                    currentPotentialItem = weaponsFound[i].collider.gameObject;
+                    currentPotentialItem = itemsFound[i].collider.gameObject;
 
                     print(currentPotentialItem);
 
@@ -86,7 +86,7 @@ public class pickUpItem : NetworkBehaviour
 
 
             //gets the inventory of the player
-            Inventory inventory = GetComponent<playerStats>().inventory;
+            Inventory inventory = GetComponent<Inventory>();
 
             if (!inventory.isFull())
             {
@@ -102,8 +102,8 @@ public class pickUpItem : NetworkBehaviour
                 }
 
                 CmdDestroyItem(currentPotentialItem);
+                Debug.Log("picked up " + currentPotentialItem.name);
                 currentPotentialItem = null;
-
 
             }
             else

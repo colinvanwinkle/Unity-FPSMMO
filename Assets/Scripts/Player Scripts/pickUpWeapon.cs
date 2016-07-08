@@ -98,7 +98,7 @@ public class pickUpWeapon : NetworkBehaviour
 
 
             //gets the inventory of the player
-            Inventory inventory = GetComponent<playerStats>().inventory;
+            Inventory inventory = GetComponent<Inventory>();
 
             //if we currently have a weapon and we have room in our inventory
             //we want to add it to our players inventory

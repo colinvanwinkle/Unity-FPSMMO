@@ -27,7 +27,7 @@ public class Fire : NetworkBehaviour {
 			return;
 
 		//checks if mouse button is clicked				//check if it is held and an automatic (weapon must not be null beacuse we are using weapon reference)
-		if ((Input.GetMouseButtonDown (0) || (weapon != null && Input.GetMouseButton (0) && weapon.isAutomatic ())) && fireable) {
+		if ((Input.GetKeyDown("p") ||Input.GetMouseButtonDown (0) || (weapon != null && Input.GetMouseButton (0) && weapon.isAutomatic ())) && fireable) {
 			
 			//gets the weapon script
 			weapon = GetComponent<Weapon> ();

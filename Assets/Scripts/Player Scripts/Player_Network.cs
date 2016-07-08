@@ -31,8 +31,7 @@ public class Player_Network : NetworkBehaviour {
 		//appends a random number to the end of the player name
 		int id = Random.Range (1, 100);
 		this.name = this.name + id;
-		playerStats.players.Add (this.gameObject.name, 100);
-
+		//playerStats.players.Add (this.gameObject.name, 1000);
 
 
 		//disables character if we are not that controller

@@ -6,28 +6,19 @@ public class Inventory : MonoBehaviour {
 
     int[,] inventory = new int[16,2];
     int currInvIdx = 0;
+    GameObject invText;
 
-	void Start () {
-	//will have to load in from database
-	}
-
-
-
-    void Update()
-    {
-
-        
-        GameObject invText = GameObject.Find("InventoryInfo");
-        invText.GetComponent<Text>().text = "";
-
-        for (int i = 0; i < inventory.GetLength(0); i++)
-        {
-            if (inventory[i,0] != 0)
-            invText.GetComponent<Text>().text = invText.GetComponent<Text>().text + "\n" + inventory[i, 0] + " ("+ GetComponent<IDDict>().getObjectNameByID(inventory[i,0]) + ") " + " x " + inventory[i, 1];
-        }
-
-
+    void Start () {
+        invText = GameObject.Find("InventoryInfo");
     }
+
+
+
+    
+        
+ 
+
+    
 
 
     public void addToInventory(int ID, int multiplicity)
@@ -58,6 +49,17 @@ public class Inventory : MonoBehaviour {
 
         while (currInvIdx < inventory.GetLength(0) && inventory[currInvIdx, 0] != 0)
             currInvIdx++;
+
+
+
+        invText.GetComponent<Text>().text = "";
+
+        for (int i = 0; i < inventory.GetLength(0); i++)
+        {
+            if (inventory[i, 0] != 0)
+                invText.GetComponent<Text>().text = invText.GetComponent<Text>().text + "\n" + inventory[i, 0] + " (" + GetComponent<IDDict>().getObjectNameByID(inventory[i, 0]) + ") " + " x " + inventory[i, 1];
+        }
+
 
     }
 

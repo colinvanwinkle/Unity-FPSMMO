@@ -47,16 +47,18 @@ public class moveProjectile : NetworkBehaviour {
 			//interpolates whether a bullet will hit or not
 			RaycastHit rayFromProjectileForward;  
 			RaycastHit rayFromProjectileBackward; 
-
+            
 			if (Physics.Raycast (projectile.bullet.transform.position, -projectile.direction, out rayFromProjectileBackward, (float)projectile.bulletSpeed / 200) && rayFromProjectileBackward.collider.tag.Equals ("Enemy") && projectile.GetInstanceID() != hasbeenHitAlready) {
 				hasbeenHitAlready = projectile.GetInstanceID ();
-				projectile.bullet.GetComponent<detectCollisions> ().OnTriggerEnter (rayFromProjectileBackward.collider);
+                projectile.bullet.GetComponent<detectCollisions>().interpolatedHit(rayFromProjectileBackward.collider);
+                Destroy(projectile.bullet);
 			} else if (Physics.Raycast (projectile.bullet.transform.position, projectile.direction, out rayFromProjectileForward, (float)projectile.bulletSpeed / 200) && rayFromProjectileForward.collider.tag.Equals ("Enemy") && projectile.GetInstanceID() != hasbeenHitAlready) {
 				hasbeenHitAlready = projectile.GetInstanceID ();
-				projectile.bullet.GetComponent<detectCollisions> ().OnTriggerEnter (rayFromProjectileForward.collider);
+				projectile.bullet.GetComponent<detectCollisions> ().interpolatedHit (rayFromProjectileForward.collider);
+                Destroy(projectile.bullet);
 
 			}
-
+            
 		
 
 
