@@ -88,6 +88,20 @@ public class Inventory : MonoBehaviour {
 			
 	}
 
+	public void swap(int start, int end){
+		print ("swapped " + start + " with " + end);
+		int tempID = inventory [start, 0];
+		int tempCount = inventory [start, 1];
+
+		inventory [start, 0] = inventory [end, 0];
+		inventory [start, 1] = inventory [end, 1];
+
+		inventory [end, 0] = tempID;
+		inventory [end, 1] = tempCount;
+
+		updateInvText ();
+
+	}
 
 
 
@@ -122,6 +136,8 @@ public class Inventory : MonoBehaviour {
 		}
 
 	}
+
+
 
 
     //HELPER METHODS ----------------------------------------------------------------------------------------------------------------------
