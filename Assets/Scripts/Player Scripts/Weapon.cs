@@ -22,7 +22,6 @@ public class Weapon : NetworkBehaviour{
 	public float range;
     public int ID;
     public string ammoType;
-    
 
 	bool isAuto = false;
 	bool reloading = false;
@@ -32,7 +31,7 @@ public class Weapon : NetworkBehaviour{
 	public float spreadFactor;
 
 	// Update is called once per frame
-	public void initWeaponInfo () {
+	public void initWeaponInfo (bool newGun, int ammoToAdd) {
 
 		//gets the active weapon from the pickUpWeapon script
 		pickUpWeapon weaponScript = GetComponent<pickUpWeapon> ();
@@ -74,8 +73,10 @@ public class Weapon : NetworkBehaviour{
 				break;
 			}
 
-			ammo = maxAmmoCapacity;
-
+			if (newGun)
+				ammo = maxAmmoCapacity;
+			else
+				ammo = ammoToAdd;
 
 		}
 	}//end of initWeaponInfo()

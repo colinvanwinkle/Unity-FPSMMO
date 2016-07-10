@@ -57,4 +57,13 @@ public class IDDict : MonoBehaviour {
     {
         return objectIDs[name];
     }
+
+	public static string getItemType(int ID){
+		if (ID < 100 && ID > 0)
+			return "Weapon";
+		else if (ID > 100 && ID < 200)
+			return "Item";
+		else
+			return null;
+	}
 }

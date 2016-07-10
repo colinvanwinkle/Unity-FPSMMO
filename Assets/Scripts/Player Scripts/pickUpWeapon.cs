@@ -103,6 +103,7 @@ public class pickUpWeapon : NetworkBehaviour
             {
                 //gets the id of the object based on the weapons name
                 inventory.addToInventory(GetComponent<IDDict>().getIDByObjectName(currentPotentialWeap.name), 1);
+				print ("destroying weap");
                 CmdDestroyWeap(currentPotentialWeap);
                 currentPotentialWeap = null;
 
@@ -137,7 +138,7 @@ public class pickUpWeapon : NetworkBehaviour
 
 
     [Command]
-    void CmdDrawWeap(GameObject weapon)
+    public void CmdDrawWeap(GameObject weapon)
     {
         RpcDrawWeap(weapon);
     }
@@ -148,6 +149,7 @@ public class pickUpWeapon : NetworkBehaviour
 
 
         //sets the parent of the new weapon 
+
         weap.transform.SetParent(this.transform.GetChild(0));
 
 
@@ -169,8 +171,8 @@ public class pickUpWeapon : NetworkBehaviour
                 weaponPosition = new Vector3(0.95f, -0.89f, 1.68f);
                 break;
             case "Rifle":
-                weaponRotation = new Vector3(-5.33f, 85.32f, 0.9f);
-                weaponPosition = new Vector3(.2f, -0.47f, 1.5f);
+                weaponRotation = new Vector3(270f, 86.32f, 0f);
+                weaponPosition = new Vector3(.4f, -0.47f, 1f);
                 break;
         }
 
@@ -195,6 +197,39 @@ public class pickUpWeapon : NetworkBehaviour
     }
 
 
+
+	[Command]
+	public void CmdDropToGround(int ID){
+		GameObject itemDropped = GameObject.Instantiate (GameObject.Find ("Terrain").GetComponent<PrefabHolder> ().getObject (ID)) as GameObject;
+		itemDropped.AddComponent<NetworkIdentity> ();
+		//ClientScene.RegisterPrefab (itemDropped, NetworkHash128.Parse(itemDropped.name));
+		NetworkServer.Spawn (itemDropped);
+		itemDropped.transform.SetParent (this.transform);
+		itemDropped.transform.localPosition = new Vector3 (0, 0, 0);
+
+		//RpcDropToGround (itemDropped, ID);
+
+	}
+
+	[ClientRpc]
+	void RpcDropToGround(GameObject item, int ID){
+
+		//dropping ammo isnt working, also, picking up weapon again doesn't cause it to destroy
+		item.transform.localPosition = new Vector3 (0, 0, 0);
+		item.tag = IDDict.getItemType (ID);
+		item.AddComponent<Rigidbody> ();
+		item.AddComponent<BoxCollider> ();
+			item.name = GetComponent<IDDict> ().getObjectNameByID (ID);
+
+
+		if (item.tag.Equals ("Weapon")) {
+			item.transform.SetParent (GameObject.Find ("weapons_on_ground").transform);
+		}
+		else if (item.tag.Equals("Item"))
+			item.transform.SetParent(GameObject.Find("ammo_on_ground").transform);
+
+
+	}
 
 }
 

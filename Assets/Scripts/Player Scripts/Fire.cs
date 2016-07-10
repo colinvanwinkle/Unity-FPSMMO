@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
 using UnityEngine.UI;
-
+using UnityStandardAssets.Characters.FirstPerson;
 public class Fire : NetworkBehaviour {
 
 	//list we will add projectiles to
@@ -38,18 +38,22 @@ public class Fire : NetworkBehaviour {
 
 		if (!isLocalPlayer)
 			return;
+
+		weapon = GetComponent<Weapon> ();
+
+		//gets the characteristics of the current weapon if a new weapon is being used
+		if (weapon.currentWeapon != GetComponent<pickUpWeapon> ().activeWeapon) {
+			weapon.currentWeapon = GetComponent<pickUpWeapon> ().activeWeapon;
+			weapon.initWeaponInfo (true, 0);
+		}
+
 	
 		//checks if mouse button is clicked		//check if it is held and an automatic (weapon must not be null beacuse we are using weapon reference)
-		if ((Input.GetMouseButtonDown (0) || (weapon != null && Input.GetMouseButton (0) && weapon.isAutomatic ())) && fireable) {
+		if ((Input.GetMouseButtonDown (0) || (weapon != null && Input.GetMouseButton (0) && weapon.isAutomatic ())) && fireable && GetComponent<FirstPersonController>().enabled == true) {
 			
 			weapon = GetComponent<Weapon> ();
 
-			//gets the characteristics of the current weapon if a new weapon is being used
-			if (weapon.currentWeapon != GetComponent<pickUpWeapon> ().activeWeapon) {
-				weapon.currentWeapon = GetComponent<pickUpWeapon> ().activeWeapon;
-				weapon.initWeaponInfo ();
-			}
-
+		
 
 			//we want to exit this update() if user has no weapon
 			if (weapon.currentWeapon == null) 
