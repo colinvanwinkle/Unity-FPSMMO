@@ -73,7 +73,7 @@ public class Inventory : MonoBehaviour {
 
 	public void removeFromInventory(int slot){
 
-		GetComponent<pickUpWeapon>().CmdDropToGround(inventory[slot,0]);
+		GetComponent<pickUpItem>().dropItem(inventory[slot,0]);
 		inventory [slot, 0] = 0;
 		inventory [slot, 1] = 0;
 		inventory [slot, 2] = 0;
@@ -141,7 +141,6 @@ public class Inventory : MonoBehaviour {
 		newWeap.name = nameOfWeap;
 		newWeap.AddComponent<NetworkIdentity> ();
 		newWeap.GetComponent<NetworkIdentity> ().localPlayerAuthority = true;
-		NetworkServer.Spawn (newWeap);
 
 		inventory [newWeapSlot, 0] = GetComponent<IDDict> ().getIDByObjectName (GetComponent<pickUpWeapon> ().activeWeapon.name);
 	
@@ -149,7 +148,7 @@ public class Inventory : MonoBehaviour {
 		GetComponent<Weapon> ().currentWeapon = newWeap;
 		GetComponent<Weapon> ().initWeaponInfo (false, ammoToAdd);
 			
-		GetComponent<pickUpWeapon> ().CmdDrawWeap(newWeap);
+	//	GetComponent<pickUpWeapon> ().CmdDrawWeap(newWeap);
 
 		GameObject.Find ("WeaponSlot").GetComponent<Text> ().text = "Current Weapon: " + newWeap.name;
 

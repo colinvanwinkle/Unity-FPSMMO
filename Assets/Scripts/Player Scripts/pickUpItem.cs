@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
+using System.Collections.Generic;
 
 //NOTES. IMPLEMENT NEW METHOD OF FINDING WEAPON (USING X # OF RAYS TO SEE WHICH OBJECT IS IN FIELD OF VIEW MORE)
 //FOR SPAWNING AMMO,WAEPONS, MAKE THEM BE AT ALL LOCATIONS BUT DISABLE THEIR MESHES
@@ -142,8 +143,55 @@ public class pickUpItem : NetworkBehaviour
     [ClientRpc]
     void RpcDestroyItem(GameObject item)
     {
+
+
         Destroy(item);
     }
+
+	public void dropItem(int ID){
+		
+		CmdDropItem (ID);
+	}
+
+	[Command]
+	void CmdDropItem(int ID){
+		List<GameObject> prefabs = GameObject.Find ("NetworkManager").GetComponent<NetworkManager> ().spawnPrefabs;
+		GameObject prefab = null;
+
+		foreach (GameObject obj in prefabs) {
+			if (obj.name.Equals (GetComponent<IDDict> ().getObjectNameByID (ID))) {
+				prefab = obj;
+				break;
+		}
+	}
+			
+
+		GameObject item = Instantiate (prefab);
+
+		NetworkServer.Spawn (item);
+		RpcDropItem (item, ID);
+
+	
+	}
+
+
+	[ClientRpc]
+	void RpcDropItem(GameObject item , int ID){
+		item.transform.SetParent (this.gameObject.transform);
+		item.transform.localPosition = new Vector3 (0, 0, 0);
+		item.tag = IDDict.getItemType (ID);
+		item.AddComponent<BoxCollider> ();
+		item.name = GetComponent<IDDict> ().getObjectNameByID (ID);
+
+
+		if (item.tag.Equals ("Weapon")) {
+			item.transform.SetParent (GameObject.Find ("weapons_on_ground").transform);
+		}
+		else if (item.tag.Equals("Item") && item.name.Substring(0,4).Equals("ammo"))
+			item.transform.SetParent(GameObject.Find("ammo_on_ground").transform);
+	}
+
+
 }
 
 

@@ -30,11 +30,6 @@ public class Player_Network : NetworkBehaviour {
 		int id = Random.Range (1, 100);
 		this.name = this.name + id;
 
-		//sets the player in each inventory slot to ours so the inventory slots know who's inventory to get
-		for (int i = 0; i < 16; i++) {
-			GameObject invSlot = GameObject.Find ("Grid").transform.GetChild (i).gameObject;
-			invSlot.GetComponent<Drag>().player = this.gameObject;
-		}
 
 		//disables character if we are not that controller
 		if (!isLocalPlayer) {
@@ -43,8 +38,16 @@ public class Player_Network : NetworkBehaviour {
 
 			characterController.enabled = false;
 			FPSController.enabled = false;
-
+			return;
 		}
+
+		//sets the player in each inventory slot to ours so the inventory slots know who's inventory to get
+		for (int i = 0; i < 16; i++) {
+			GameObject invSlot = GameObject.Find ("Grid").transform.GetChild (i).gameObject;
+			invSlot.GetComponent<Drag>().player = this.gameObject;
+		}
+
+	
 	}
 
 

@@ -198,38 +198,6 @@ public class pickUpWeapon : NetworkBehaviour
 
 
 
-	[Command]
-	public void CmdDropToGround(int ID){
-		GameObject itemDropped = GameObject.Instantiate (GameObject.Find ("Terrain").GetComponent<PrefabHolder> ().getObject (ID)) as GameObject;
-		itemDropped.AddComponent<NetworkIdentity> ();
-		//ClientScene.RegisterPrefab (itemDropped, NetworkHash128.Parse(itemDropped.name));
-		NetworkServer.Spawn (itemDropped);
-		itemDropped.transform.SetParent (this.transform);
-		itemDropped.transform.localPosition = new Vector3 (0, 0, 0);
-
-		//RpcDropToGround (itemDropped, ID);
-
-	}
-
-	[ClientRpc]
-	void RpcDropToGround(GameObject item, int ID){
-
-		//dropping ammo isnt working, also, picking up weapon again doesn't cause it to destroy
-		item.transform.localPosition = new Vector3 (0, 0, 0);
-		item.tag = IDDict.getItemType (ID);
-		item.AddComponent<Rigidbody> ();
-		item.AddComponent<BoxCollider> ();
-			item.name = GetComponent<IDDict> ().getObjectNameByID (ID);
-
-
-		if (item.tag.Equals ("Weapon")) {
-			item.transform.SetParent (GameObject.Find ("weapons_on_ground").transform);
-		}
-		else if (item.tag.Equals("Item"))
-			item.transform.SetParent(GameObject.Find("ammo_on_ground").transform);
-
-
-	}
 
 }
 
