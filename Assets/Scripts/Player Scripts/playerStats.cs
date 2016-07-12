@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class playerStats : NetworkBehaviour {
 
 
-
+	//syncvar variables are updated to all clients when they change on the server
     [SyncVar]
     private int health = 1000;
 
@@ -15,7 +15,7 @@ public class playerStats : NetworkBehaviour {
 	//sends command to all clients to damage this player
 	[Command]
 	public void CmddamagePlayer(GameObject playerHit, GameObject playerThatHit, int dmg){
-		//subtract the daamge from the players health
+		//subtract the daamge from the players health (since this is a SyncVar it will be pushed to all clients)
         health -= dmg;
 		RpcdamagePlayer (playerHit, playerThatHit, dmg);
 

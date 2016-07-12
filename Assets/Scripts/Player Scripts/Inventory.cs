@@ -71,8 +71,10 @@ public class Inventory : MonoBehaviour {
 
     }
 
+	//overloaded methods to remove the item from the inventor and drop it on the ground
 	public void removeFromInventory(int slot){
 
+		//calls the drop item method in the pickUpItem script
 		GetComponent<pickUpItem>().dropItem(inventory[slot,0]);
 		inventory [slot, 0] = 0;
 		inventory [slot, 1] = 0;
@@ -107,8 +109,10 @@ public class Inventory : MonoBehaviour {
 			
 	}
 
+
+	//swaps the two items in the inventory
 	public void swap(int start, int end){
-		print ("swapped " + start + " with " + end);
+		
 		int tempID = inventory [start, 0];
 		int tempCount = inventory [start, 1];
 		int tempAmmo = inventory [start, 2];
@@ -128,27 +132,38 @@ public class Inventory : MonoBehaviour {
 
 	public void equipNewWeap(int newWeapSlot){
 
+		//gets the new weapon from the 
 		pickUpWeapon weapon = GetComponent<pickUpWeapon> ();
+		//gets the amount of ammo in the weapons slot in the inventory
 		int ammoToAdd = inventory [newWeapSlot, 2];
+
+		//swaps the current weapon with the weapon being swapped for current weapon in
+		//inventory
 		inventory [newWeapSlot, 2] = GetComponent<Weapon> ().ammo;
 
+		//destroys weapon on clients screen (we will change this later as it only updates
+		//the client's screen
 		Destroy (weapon.activeWeapon);
 
+		//THIS BLOCK IS NOT FUNCTIONAL AT THIS POINT AS IT ONLY SPAWNS A WEAPON ON THE CLIENT'S SCREEN AND DOESN'T EVEN SET ITS POSITION TO 0,0,0
 		string nameOfWeap = GetComponent<IDDict> ().getObjectNameByID (inventory [newWeapSlot, 0]);
-		GameObject newWeap = (GameObject) GameObject.Instantiate (GameObject.Find ("Terrain").GetComponent<PrefabHolder> ().getObject(nameOfWeap), new Vector3 (0f, 0f, 0f), Quaternion.identity);
+		GameObject newWeap = (GameObject) GameObject.Instantiate (GameObject.Find ("Terrain").GetComponent<PrefabHolder> ().getObject(nameOfWeap), new Vector3 (0f, 0f, 0f), Quaternion.identity); 
+		//we will need to keep this instantiation line
 
 		newWeap.transform.SetParent (this.gameObject.transform);
 		newWeap.name = nameOfWeap;
 		newWeap.AddComponent<NetworkIdentity> ();
 		newWeap.GetComponent<NetworkIdentity> ().localPlayerAuthority = true;
+		//____________________________________________________________________________________________
 
+		//sets the old slot of new current weapon to the new slot of the old weapon
 		inventory [newWeapSlot, 0] = GetComponent<IDDict> ().getIDByObjectName (GetComponent<pickUpWeapon> ().activeWeapon.name);
 	
+		//sets the new weapon to the weapon we just instantiated 
 		weapon.activeWeapon = newWeap;
 		GetComponent<Weapon> ().currentWeapon = newWeap;
 		GetComponent<Weapon> ().initWeaponInfo (false, ammoToAdd);
 			
-	//	GetComponent<pickUpWeapon> ().CmdDrawWeap(newWeap);
 
 		GameObject.Find ("WeaponSlot").GetComponent<Text> ().text = "Current Weapon: " + newWeap.name;
 
@@ -209,9 +224,8 @@ public class Inventory : MonoBehaviour {
     }
 
 	private void updateInvText(){
-		//updates inventory info every time we add
 
-
+		//updates the inventory text
 		for (int i = 0; i < inventory.GetLength(0); i++)
 		{
 			if (inventory [i, 0] != 0)

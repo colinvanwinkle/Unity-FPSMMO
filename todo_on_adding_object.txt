@@ -1,0 +1,5 @@
+Whenever we add an object we need to update the following scripts as well as putting the object in the spawnable prefabs list of the 'NetworkManager' object:
+
+IDDict.cs
+Weapon.cs (in init() and getMaxAmmo()) if were adding a new weapon
+

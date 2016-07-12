@@ -3,11 +3,7 @@ using System.Collections;
 using UnityEngine.Networking;
 using System.Collections.Generic;
 
-//NOTES. IMPLEMENT NEW METHOD OF FINDING WEAPON (USING X # OF RAYS TO SEE WHICH OBJECT IS IN FIELD OF VIEW MORE)
-//FOR SPAWNING AMMO,WAEPONS, MAKE THEM BE AT ALL LOCATIONS BUT DISABLE THEIR MESHES
 
-    //EVERY TIME WE ADD AMMO, WE NEED TO UPDATE IDDICT AND MAXAMMO() IN WEAPON
-    //EVERY TIME WE ADD A WEAPON, WE NEED TO UPDATE CASE: IN WEAPON AND IDDICT.CS
 public class pickUpItem : NetworkBehaviour
 {
 
@@ -148,13 +144,18 @@ public class pickUpItem : NetworkBehaviour
         Destroy(item);
     }
 
+	//caled by inventory script when we remove an item
 	public void dropItem(int ID){
 		
 		CmdDropItem (ID);
 	}
 
+
+	//this code is only executed on server
 	[Command]
 	void CmdDropItem(int ID){
+
+		//gets the prefab from the network manager and loops through the list of prefabs until we have a name match with the ID
 		List<GameObject> prefabs = GameObject.Find ("NetworkManager").GetComponent<NetworkManager> ().spawnPrefabs;
 		GameObject prefab = null;
 
@@ -166,6 +167,8 @@ public class pickUpItem : NetworkBehaviour
 	}
 			
 
+		//when we find the prefab we want, we NetworkServer.spawn() it on all clients
+		//and set the properties of the client
 		GameObject item = Instantiate (prefab);
 
 		NetworkServer.Spawn (item);
@@ -174,16 +177,21 @@ public class pickUpItem : NetworkBehaviour
 	
 	}
 
-
+	//this code is executed on all clients
 	[ClientRpc]
 	void RpcDropItem(GameObject item , int ID){
+
+		//sets the parent to the object of the caller of this method (the person who dropped the item)
 		item.transform.SetParent (this.gameObject.transform);
 		item.transform.localPosition = new Vector3 (0, 0, 0);
+		//sets the tag depending on the item tag
 		item.tag = IDDict.getItemType (ID);
 		item.AddComponent<BoxCollider> ();
 		item.name = GetComponent<IDDict> ().getObjectNameByID (ID);
 
-
+		//sets the parent of the item depending on its tag (we will probably have to name different types of items
+		//appropriate and check the substring to get the actual type other than generic "item" like we do in the second
+		//else if statement
 		if (item.tag.Equals ("Weapon")) {
 			item.transform.SetParent (GameObject.Find ("weapons_on_ground").transform);
 		}

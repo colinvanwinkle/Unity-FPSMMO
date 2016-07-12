@@ -58,6 +58,7 @@ public class IDDict : MonoBehaviour {
         return objectIDs[name];
     }
 
+	//gets the time of the object based on its ID
 	public static string getItemType(int ID){
 		if (ID < 100 && ID > 0)
 			return "Weapon";
