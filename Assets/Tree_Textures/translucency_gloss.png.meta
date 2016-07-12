@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 01fc5870a44e4b047b6a9804934e68c2
-timeCreated: 1466748334
+guid: 8f1cfd925a691734ca727d755a673dd2
+timeCreated: 1468298033
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -16,7 +16,7 @@ TextureImporter:
     mipMapFadeDistanceEnd: 3
   bumpmap:
     convertToNormalMap: 0
-    externalNormalMap: 1
+    externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
@@ -46,7 +46,7 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 0
-  textureType: 1
+  textureType: -1
   buildTargetSettings: []
   spriteSheet:
     sprites: []
