@@ -1,0 +1,138 @@
+fileFormatVersion: 2
+guid: 57063b2023ce61c41b0d58947468827d
+timeCreated: 1468125881
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Barrel
+    100002: Camera
+    100004: Hammer
+    100006: //RootNode
+    100008: Lamp
+    100010: Plane
+    100012: Top
+    100014: Trigger
+    400000: Barrel
+    400002: Camera
+    400004: Hammer
+    400006: //RootNode
+    400008: Lamp
+    400010: Plane
+    400012: Top
+    400014: Trigger
+    2300000: Barrel
+    2300002: Hammer
+    2300004: Plane
+    2300006: Top
+    2300008: Trigger
+    3300000: Barrel
+    3300002: Hammer
+    3300004: Plane
+    3300006: Top
+    3300008: Trigger
+    4300000: Hammer
+    4300002: Barrel
+    4300004: Top
+    4300006: Trigger
+    4300008: Plane
+    7400000: Hammer|BarrelAction
+    7400002: Hammer|Fire
+    7400004: Hammer|Fire.001
+    7400006: Hammer|Fire.002
+    7400008: Hammer|PlaneAction
+    7400010: Hammer|Shoot
+    7400012: Hammer|TopAction
+    7400014: Barrel|BarrelAction
+    7400016: Barrel|Fire
+    7400018: Barrel|Fire.001
+    7400020: Barrel|Fire.002
+    7400022: Barrel|PlaneAction
+    7400024: Barrel|Shoot
+    7400026: Barrel|TopAction
+    7400028: Top|BarrelAction
+    7400030: Top|Fire
+    7400032: Top|Fire.001
+    7400034: Top|Fire.002
+    7400036: Top|PlaneAction
+    7400038: Top|Shoot
+    7400040: Top|TopAction
+    7400042: Trigger|BarrelAction
+    7400044: Trigger|Fire
+    7400046: Trigger|Fire.001
+    7400048: Trigger|Fire.002
+    7400050: Trigger|PlaneAction
+    7400052: Trigger|Shoot
+    7400054: Trigger|TopAction
+    7400056: Plane|BarrelAction
+    7400058: Plane|Fire
+    7400060: Plane|Fire.001
+    7400062: Plane|Fire.002
+    7400064: Plane|PlaneAction
+    7400066: Plane|Shoot
+    7400068: Plane|TopAction
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
