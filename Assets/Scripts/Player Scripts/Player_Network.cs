@@ -23,7 +23,7 @@ public class Player_Network : NetworkBehaviour {
 		playerTransform = GetComponent<Transform> ();
 
 		//puts players at this location (will change)
-		playerTransform.position = new Vector3 (250, 11, 170);
+		playerTransform.position = GameObject.Find("SpawnPoint").transform.position;
 		this.gameObject.tag = "Enemy";
 
 		//appends a random number to the end of the player name
