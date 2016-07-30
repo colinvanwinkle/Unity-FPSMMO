@@ -147,10 +147,11 @@ public class Inventory : MonoBehaviour {
 
 		//THIS BLOCK IS NOT FUNCTIONAL AT THIS POINT AS IT ONLY SPAWNS A WEAPON ON THE CLIENT'S SCREEN AND DOESN'T EVEN SET ITS POSITION TO 0,0,0
 		string nameOfWeap = GetComponent<IDDict> ().getObjectNameByID (inventory [newWeapSlot, 0]);
-		GameObject newWeap = (GameObject) GameObject.Instantiate (GameObject.Find ("Terrain").GetComponent<PrefabHolder> ().getObject(nameOfWeap), new Vector3 (0f, 0f, 0f), Quaternion.identity); 
+		GameObject newWeap = (GameObject) GameObject.Instantiate (GameObject.Find ("Terrain").GetComponent<WeapPrefabHolder> ().getObject(nameOfWeap), new Vector3 (0f, 0f, 0f), Quaternion.identity); 
 		//we will need to keep this instantiation line
 
 		newWeap.transform.SetParent (this.gameObject.transform);
+		newWeap.transform.position = Vector3.zero;
 		newWeap.name = nameOfWeap;
 		newWeap.AddComponent<NetworkIdentity> ();
 		newWeap.GetComponent<NetworkIdentity> ().localPlayerAuthority = true;

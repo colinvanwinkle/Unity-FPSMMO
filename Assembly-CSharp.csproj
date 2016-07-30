@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Drag.cs" />
-     <Compile Include="Assets\Scripts\InitWorldObjects.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\Fire.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\IDDict.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\Inventory.cs" />
@@ -57,8 +56,9 @@
      <Compile Include="Assets\Scripts\Player Scripts\pickUpItem.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\pickUpWeapon.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\playerStats.cs" />
-     <Compile Include="Assets\Scripts\PrefabHolder.cs" />
      <Compile Include="Assets\Scripts\Projectile.cs" />
+     <Compile Include="Assets\Scripts\Terrain Scripts\InitWorldObjects.cs" />
+     <Compile Include="Assets\Scripts\Terrain Scripts\WeapPrefabHolder.cs" />
      <Compile Include="Assets\Scripts\detectCollisions.cs" />
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
