@@ -18,3 +18,12 @@ to allow git to overwrite your files:
 
  git fetch origin master
  git merge -s recursive -X theirs origin/master
+
+MAP CHANGES
+Assets:
+	Game.Unity
+	Terrain
+Library:
+	assetDatabase3
+	AssetServerCacheV3
+	Scriptmapper
