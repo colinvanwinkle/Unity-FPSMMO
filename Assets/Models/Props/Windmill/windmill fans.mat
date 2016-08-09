@@ -6,11 +6,11 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: No Name
-  m_Shader: {fileID: 10600, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: windmill fans
+  m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -19,14 +19,14 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 2e42ee1c021e7354da199aaaf4c72fde, type: 3}
-          m_Scale: {x: 1, y: 7.37}
+          m_Texture: {fileID: 2800000, guid: 14dc442ba04953642981eb03d68fc087, type: 3}
+          m_Scale: {x: 10, y: 10}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _BumpMap
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: c02e6b5678915224198f6d7723d815da, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -41,7 +41,7 @@ Material:
           name: _EmissionMap
         second:
           m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 7.37}
+          m_Scale: {x: 10, y: 10}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -80,14 +80,21 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _GlossMap
+          name: _SpecGlossMap
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _SpecGlossMap
+          name: _Illum
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Cube
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -108,11 +115,11 @@ Material:
       data:
         first:
           name: _Shininess
-        second: 0.078125
+        second: 0.01
       data:
         first:
           name: _Parallax
-        second: 0.02
+        second: 0.0451
       data:
         first:
           name: _ZWrite
@@ -120,7 +127,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: 0.5
+        second: 0.763
       data:
         first:
           name: _BumpScale
@@ -144,11 +151,19 @@ Material:
       data:
         first:
           name: _Metallic
-        second: 0
+        second: 0.439
       data:
         first:
-          name: _SquashAmount
+          name: _Emission
         second: 1
+      data:
+        first:
+          name: _Slope
+        second: -13.68
+      data:
+        first:
+          name: ref_at_norm_incidence
+        second: 6.29
     m_Colors:
       data:
         first:
@@ -157,16 +172,12 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0.31617647, g: 0.13955376, b: 0.1278655, a: 1}
+        second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
           name: _SpecColor
-        second: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+        second: {r: 0.8235294, g: 0.8235294, b: 0.8235294, a: 1}
       data:
         first:
-          name: _TreeInstanceColor
-        second: {r: 1, g: 1, b: 1, a: 1}
-      data:
-        first:
-          name: _TreeInstanceScale
-        second: {r: 1, g: 1, b: 1, a: 1}
+          name: _ReflectColor
+        second: {r: 1, g: 1, b: 1, a: 0.5}
