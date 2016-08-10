@@ -27,3 +27,45 @@ Library:
 	assetDatabase3
 	AssetServerCacheV3
 	Scriptmapper
+
+
+NEEDED ASSETS
+
+	Chain Link Fence
+	Brick Wall
+
+TOWNS
+	Car Bridge
+	Road Textures
+	Telephone pole wires
+	Sidewalks
+	Water Tank
+	Mail Box
+	Church
+CITY
+	Car Models
+	Street Signs
+	Gas Station
+	Street Light
+	Police Station
+FARM
+	Fences
+	Haybales
+	Tractor
+	Orchard Trees
+	Farm House
+	Silo
+CAMP
+	Tents
+	Fire Pits
+	Motor Home
+	Benches
+	Tables
+	Log Cabin
+RICH AREA
+
+FOREST
+	Tree Diversity
+	Logs
+	More Rocks
+	Plants
