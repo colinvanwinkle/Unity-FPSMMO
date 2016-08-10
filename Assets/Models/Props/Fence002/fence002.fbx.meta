@@ -1,51 +1,22 @@
 fileFormatVersion: 2
-guid: da597e83499b8b44aa8741b8a7882a7d
-timeCreated: 1470714587
+guid: af2df49d403a9e148b6a9d5e2ed769e5
+timeCreated: 1470810109
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Circle Wiring
-    100002: Fans
-    100004: Nose
-    100006: Rings
-    100008: Stand
-    100010: //RootNode
-    100012: Wiring
-    100014: Camera
-    100016: fANS
-    100018: Lamp
-    400000: Circle Wiring
-    400002: Fans
-    400004: Nose
-    400006: Rings
-    400008: Stand
-    400010: //RootNode
-    400012: Wiring
-    400014: Camera
-    400016: fANS
-    400018: Lamp
-    2300000: Circle Wiring
-    2300002: Fans
-    2300004: Nose
-    2300006: Rings
-    2300008: Stand
-    2300010: Wiring
-    2300012: fANS
-    3300000: Circle Wiring
-    3300002: Fans
-    3300004: Nose
-    3300006: Rings
-    3300008: Stand
-    3300010: Wiring
-    3300012: fANS
-    4300000: Fans
-    4300002: Rings
-    4300004: Wiring
-    4300006: Circle Wiring
-    4300008: Nose
-    4300010: Stand
-    4300012: fANS
+    100000: //RootNode
+    100002: Links
+    100004: Posts
+    400000: //RootNode
+    400002: Links
+    400004: Posts
+    2300000: Links
+    2300002: Posts
+    3300000: Links
+    3300002: Posts
+    4300000: Posts
+    4300002: Links
   materials:
     importMaterials: 1
     materialName: 0
@@ -70,7 +41,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 5
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1

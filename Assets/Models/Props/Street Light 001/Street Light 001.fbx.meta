@@ -1,42 +1,27 @@
 fileFormatVersion: 2
-guid: da597e83499b8b44aa8741b8a7882a7d
-timeCreated: 1470714587
+guid: a09d4f694335518448cbed310518419e
+timeCreated: 1470803358
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Circle Wiring
-    100002: Fans
-    100004: Nose
-    100006: Rings
-    100008: Stand
-    100010: //RootNode
-    100012: Wiring
-    400000: Circle Wiring
-    400002: Fans
-    400004: Nose
-    400006: Rings
-    400008: Stand
-    400010: //RootNode
-    400012: Wiring
-    2300000: Circle Wiring
-    2300002: Fans
-    2300004: Nose
-    2300006: Rings
-    2300008: Stand
-    2300010: Wiring
-    3300000: Circle Wiring
-    3300002: Fans
-    3300004: Nose
-    3300006: Rings
-    3300008: Stand
-    3300010: Wiring
-    4300000: Fans
-    4300002: Rings
-    4300004: Wiring
-    4300006: Circle Wiring
-    4300008: Nose
-    4300010: Stand
+    100000: Light
+    100002: //RootNode
+    100004: Pole
+    100006: Shield
+    400000: Light
+    400002: //RootNode
+    400004: Pole
+    400006: Shield
+    2300000: Light
+    2300002: Pole
+    2300004: Shield
+    3300000: Light
+    3300002: Pole
+    3300004: Shield
+    4300000: Light
+    4300002: Shield
+    4300004: Pole
   materials:
     importMaterials: 1
     materialName: 0
