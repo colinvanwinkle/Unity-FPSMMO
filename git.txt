@@ -39,8 +39,8 @@ TOWNS
 	Road Textures
 	Telephone pole wires
 	Sidewalks
-	Water Tank
-	Mail Box
+	Water Tank -
+	Mail Box -
 	Church
 CITY
 	Car Models
@@ -49,14 +49,14 @@ CITY
 	Street Light
 	Police Station
 FARM
-	Fences
+	Fences -
 	Haybales
 	Tractor
 	Orchard Trees
 	Farm House
-	Silo
+	Silo - 
 CAMP
-	Tents
+	Tents -
 	Fire Pits
 	Motor Home
 	Benches
