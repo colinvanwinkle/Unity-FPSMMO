@@ -1,0 +1,185 @@
+fileFormatVersion: 2
+guid: 18db0d8194df3514095399aa39c64f71
+timeCreated: 1471394135
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: BathroomWall
+    100002: Body
+    100004: Body.001
+    100006: Cube.001
+    100008: Cube.002
+    100010: Cube.003
+    100012: Cube.004
+    100014: Cube.005
+    100016: Cube.006
+    100018: Cube.007
+    100020: Cutouts
+    100022: Floor2
+    100024: //RootNode
+    100026: Stairs
+    100028: Beams
+    100030: Chimney
+    100032: Front Porch Cover
+    100034: Handrails
+    100036: OutStairs
+    100038: Porch
+    100040: RainGutter
+    100042: Roof
+    100044: Cube
+    400000: BathroomWall
+    400002: Body
+    400004: Body.001
+    400006: Cube.001
+    400008: Cube.002
+    400010: Cube.003
+    400012: Cube.004
+    400014: Cube.005
+    400016: Cube.006
+    400018: Cube.007
+    400020: Cutouts
+    400022: Floor2
+    400024: //RootNode
+    400026: Stairs
+    400028: Beams
+    400030: Chimney
+    400032: Front Porch Cover
+    400034: Handrails
+    400036: OutStairs
+    400038: Porch
+    400040: RainGutter
+    400042: Roof
+    400044: Cube
+    2300000: BathroomWall
+    2300002: Body
+    2300004: Body.001
+    2300006: Cube.001
+    2300008: Cube.002
+    2300010: Cube.003
+    2300012: Cube.004
+    2300014: Cube.005
+    2300016: Cube.006
+    2300018: Cube.007
+    2300020: Cutouts
+    2300022: Floor2
+    2300024: Stairs
+    2300026: Beams
+    2300028: Chimney
+    2300030: Front Porch Cover
+    2300032: Handrails
+    2300034: OutStairs
+    2300036: Porch
+    2300038: RainGutter
+    2300040: Roof
+    2300042: Cube
+    2300044: //RootNode
+    3300000: BathroomWall
+    3300002: Body
+    3300004: Body.001
+    3300006: Cube.001
+    3300008: Cube.002
+    3300010: Cube.003
+    3300012: Cube.004
+    3300014: Cube.005
+    3300016: Cube.006
+    3300018: Cube.007
+    3300020: Cutouts
+    3300022: Floor2
+    3300024: Stairs
+    3300026: Beams
+    3300028: Chimney
+    3300030: Front Porch Cover
+    3300032: Handrails
+    3300034: OutStairs
+    3300036: Porch
+    3300038: RainGutter
+    3300040: Roof
+    3300042: Cube
+    3300044: //RootNode
+    4300000: Floor2
+    4300002: Stairs
+    4300004: Cube.006
+    4300006: Cube.007
+    4300008: Cube.005
+    4300010: Cube.001
+    4300012: Cube.004
+    4300014: Cube.002
+    4300016: Cutouts
+    4300018: BathroomWall
+    4300020: Body.001
+    4300022: Cube.003
+    4300024: Body
+    4300026: RainGutter
+    4300028: Handrails
+    4300030: Chimney
+    4300032: OutStairs
+    4300034: Beams
+    4300036: Front Porch Cover
+    4300038: Porch
+    4300040: Roof
+    4300042: Cube
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
