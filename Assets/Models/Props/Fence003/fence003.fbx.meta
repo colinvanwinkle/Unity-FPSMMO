@@ -13,10 +13,13 @@ ModelImporter:
     400004: Posts
     2300000: Links
     2300002: Posts
+    2300004: //RootNode
     3300000: Links
     3300002: Posts
+    3300004: //RootNode
     4300000: Posts
     4300002: Links
+    4300004: Post
   materials:
     importMaterials: 1
     materialName: 0

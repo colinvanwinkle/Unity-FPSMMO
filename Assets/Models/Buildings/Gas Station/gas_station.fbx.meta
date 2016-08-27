@@ -1,0 +1,255 @@
+fileFormatVersion: 2
+guid: c49a006b8b41d304ca3a17e87dfe7536
+timeCreated: 1471469629
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Cube
+    100002: Cube.001
+    100004: Cylinder
+    100006: Cylinder.001
+    100008: //RootNode
+    100010: Plane
+    100012: Cube.002
+    100014: Cube.003
+    100016: Beams
+    100018: Hose
+    100020: HoseCircle
+    100022: Node
+    100024: Platform
+    100026: Pump Trigger
+    100028: Roof
+    100030: Stands
+    100032: Hose.001
+    100034: Hose.002
+    100036: Hose.003
+    100038: Hose.004
+    100040: Hose.005
+    100042: Hose.006
+    100044: Hose.007
+    100046: Node.001
+    100048: Node.002
+    100050: Node.003
+    100052: Node.004
+    100054: Node.005
+    100056: Node.006
+    100058: Node.007
+    100060: Pump Trigger.001
+    100062: Pump Trigger.002
+    100064: Pump Trigger.003
+    100066: Pump Trigger.004
+    100068: Pump Trigger.005
+    100070: Pump Trigger.006
+    100072: Pump Trigger.007
+    100074: Gas Nodes
+    400000: Cube
+    400002: Cube.001
+    400004: Cylinder
+    400006: Cylinder.001
+    400008: //RootNode
+    400010: Plane
+    400012: Cube.002
+    400014: Cube.003
+    400016: Beams
+    400018: Hose
+    400020: HoseCircle
+    400022: Node
+    400024: Platform
+    400026: Pump Trigger
+    400028: Roof
+    400030: Stands
+    400032: Hose.001
+    400034: Hose.002
+    400036: Hose.003
+    400038: Hose.004
+    400040: Hose.005
+    400042: Hose.006
+    400044: Hose.007
+    400046: Node.001
+    400048: Node.002
+    400050: Node.003
+    400052: Node.004
+    400054: Node.005
+    400056: Node.006
+    400058: Node.007
+    400060: Pump Trigger.001
+    400062: Pump Trigger.002
+    400064: Pump Trigger.003
+    400066: Pump Trigger.004
+    400068: Pump Trigger.005
+    400070: Pump Trigger.006
+    400072: Pump Trigger.007
+    400074: Gas Nodes
+    2300000: Cube
+    2300002: Cube.001
+    2300004: Cylinder
+    2300006: Cylinder.001
+    2300008: Plane
+    2300010: Cube.002
+    2300012: Cube.003
+    2300014: Beams
+    2300016: Hose
+    2300018: HoseCircle
+    2300020: Node
+    2300022: Platform
+    2300024: Pump Trigger
+    2300026: Roof
+    2300028: Stands
+    2300030: Hose.001
+    2300032: Hose.002
+    2300034: Hose.003
+    2300036: Hose.004
+    2300038: Hose.005
+    2300040: Hose.006
+    2300042: Hose.007
+    2300044: Node.001
+    2300046: Node.002
+    2300048: Node.003
+    2300050: Node.004
+    2300052: Node.005
+    2300054: Node.006
+    2300056: Node.007
+    2300058: Pump Trigger.001
+    2300060: Pump Trigger.002
+    2300062: Pump Trigger.003
+    2300064: Pump Trigger.004
+    2300066: Pump Trigger.005
+    2300068: Pump Trigger.006
+    2300070: Pump Trigger.007
+    3300000: Cube
+    3300002: Cube.001
+    3300004: Cylinder
+    3300006: Cylinder.001
+    3300008: Plane
+    3300010: Cube.002
+    3300012: Cube.003
+    3300014: Beams
+    3300016: Hose
+    3300018: HoseCircle
+    3300020: Node
+    3300022: Platform
+    3300024: Pump Trigger
+    3300026: Roof
+    3300028: Stands
+    3300030: Hose.001
+    3300032: Hose.002
+    3300034: Hose.003
+    3300036: Hose.004
+    3300038: Hose.005
+    3300040: Hose.006
+    3300042: Hose.007
+    3300044: Node.001
+    3300046: Node.002
+    3300048: Node.003
+    3300050: Node.004
+    3300052: Node.005
+    3300054: Node.006
+    3300056: Node.007
+    3300058: Pump Trigger.001
+    3300060: Pump Trigger.002
+    3300062: Pump Trigger.003
+    3300064: Pump Trigger.004
+    3300066: Pump Trigger.005
+    3300068: Pump Trigger.006
+    3300070: Pump Trigger.007
+    4300000: Cube.001
+    4300002: Plane
+    4300004: Cylinder.001
+    4300006: Cylinder
+    4300008: Cube
+    4300010: Cube.002
+    4300012: Cube.003
+    4300014: HoseCircle
+    4300016: Hose
+    4300018: Pump Trigger
+    4300020: Node
+    4300022: Platform
+    4300024: Stands
+    4300026: Beams
+    4300028: Roof
+    4300030: Node.007
+    4300032: Pump Trigger.007
+    4300034: Hose.007
+    4300036: Node.006
+    4300038: Pump Trigger.006
+    4300040: Hose.006
+    4300042: Node.005
+    4300044: Pump Trigger.005
+    4300046: Hose.005
+    4300048: Node.004
+    4300050: Pump Trigger.004
+    4300052: Hose.004
+    4300054: Node.003
+    4300056: Pump Trigger.003
+    4300058: Hose.003
+    4300060: Node.002
+    4300062: Pump Trigger.002
+    4300064: Hose.002
+    4300066: Node.001
+    4300068: Pump Trigger.001
+    4300070: Hose.001
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1.333
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
